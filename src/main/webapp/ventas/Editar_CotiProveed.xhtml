@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <ui:composition template="./../resources/templates/plantillaAdmin.xhtml">
+            <ui:define name="content">
+                <h:form>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Editar Cotización Proveedor</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a href="/SCFM/faces/inicio.xhtml">Inicio</a></li>
+                            <li class="breadcrumb-item"><a href="/SCFM/faces/ventas/Cotiz_Proveed.xhtml">Cotización Proveedor</a></li>
+                            <li class="breadcrumb-item active">Editar Cotización Proveedor</li>
+                        </ol>
+
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <div class="ui-fluid">
+
+                                    <div class="ui-fluid col-2">
+                                        <h:outputLabel class="mb-2" style="font-weight: 600" for="SSCotiPr" value="Solicitud de Servicio"/>
+                                        <p:inputText id="SSCotiPr"  value="#{MaterialController.idMaterial}" disabled="true"/>
+                                    </div>
+                                    <br/>
+
+                                    <div class="ui-fluid">
+                                        <h:panelGrid columns="3" >
+                                            <h:column>
+                                                <h:outputLabel class="mb-2" style="font-weight: 600" for="nomMaterial" value="Nombre de Material"/>
+                                                <p:inputText id="nomMaterial" value="#{MaterialController.nomMaterial}" required="true" requiredMessage="Campo Obligatorio"/>
+                                                <h:message for="nomMaterial" class="text-danger"/>
+                                            </h:column>
+                                            <h:column>
+                                                <div class="mx-4">
+                                                    <h:outputLabel class="mb-2" style="font-weight: 600" for="precioMaterial" value="Precio de Material"/>
+                                                    <p:inputNumber id="precioMaterial" value="#{MaterialController.precioMaterial}" required="true" requiredMessage="Campo Obligatorio"/>
+                                                    <h:message for="precioMaterial" class="text-danger"/>
+                                                </div>    
+                                            </h:column>
+                                            <h:column>
+                                                <h:outputLabel class="mb-2" style="font-weight: 600" for="cantMaterial" value="Cantidad en Bodega"/>
+                                                <p:inputNumber id="cantMaterial" decimalPlaces="0" value="#{MaterialController.cantMaterial}" required="true" requiredMessage="Campo Obligatorio"/>
+                                                <h:message for="cantMaterial" class="text-danger"/>
+                                            </h:column>
+                                        </h:panelGrid> 
+                                    </div>
+                                    <br></br>
+
+                                    <div class="ui-fluid col-2">
+                                        <h:column>
+                                            <p:commandButton value="Actualizar Material" ajax="false" action="#{MaterialController.modifica()}"/>
+                                        </h:column>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

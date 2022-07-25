@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:body>
+        <ui:composition template="./../resources/templates/plantillaAdmin.xhtml">
+            <ui:define name="content">
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Nueva Solicitud de Servicio</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item"><a href="/SCFM/faces/inicio.xhtml">Inicio</a></li>
+                        <li class="breadcrumb-item"><a href="/SCFM/faces/ventas/SolicitudesServicio.xhtml">Solicitud de Servicio</a></li>
+                        <li class="breadcrumb-item active">Nueva Solicitud de Servicio</li>
+                    </ol>
+
+                    <div class="card mb-4" id="so">
+                        <div class="card-body">
+                            <h:form enctype="multipart/form-data">
+                                <p:growl showDetail="true" id="ssn"/>
+                                <div class="ui-fluid col-10">
+                                    <h:panelGrid columns="3">
+                                        <h:column>
+                                            <h:outputLabel class="mb-2" style="font-weight: 600" for="NombreCliente" value="Nombre del Cliente" />
+                                            <p:inputText id="NombreCliente" required="true" requiredMessage="Campo Obligatorio"  value="#{soliServController.nombClient}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <div class="mx-4">
+                                                <h:outputLabel class="mb-2" style="font-weight: 600" for="PriApellCliente" value="Primer Apellido del Cliente" />
+                                                <p:inputText id="PriApellCliente" required="true" requiredMessage="Campo Obligatorio"  value="#{soliServController.priApeClient}"/>
+                                            </div>
+                                        </h:column>
+                                        <h:column>
+                                            <h:outputLabel class="mb-2" style="font-weight: 600" for="SegApellCliente" value="Segundo Apellido del Cliente" />
+                                            <p:inputText id="SegApellCliente" required="true" requiredMessage="Campo Obligatorio" value="#{soliServController.segApeClient}"/>
+                                        </h:column>
+                                    </h:panelGrid>
+                                </div>
+                                <br></br>
+
+                                <div class="ui-fluid">
+                                    <h:panelGrid columns="2" > 
+                                        <h:column>
+                                            <h:selectOneMenu class="mb-1" style="font-weight: 600; width:200px; height:25px; border-radius: 5px; border-color: #bcbebf"  value="#{soliServController.idTipoCedu}">
+                                                <f:selectItems value="#{rolTipoCedController.tipoCedu}" var="TipCed" itemLabel="Cédula #{TipCed.tipoCedula}" itemValue="#{TipCed.idTipoCedula}"/>
+                                            </h:selectOneMenu>
+                                            <br/> 
+                                            <p:inputText type="number" style="width:285px" id="CedulaClient" required="true" requiredMessage="Campo Obligatorio" value="#{soliServController.cedula}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <div class="mx-4">
+                                                <h:outputLabel class="mb-2" style="font-weight: 600;" for="TelCliente" value="Teléfono del Cliente" />
+                                                <br/>
+                                                <p:inputText type="number" style="width:325px" id="TelCliente" required="true" requiredMessage="Campo Obligatorio"  value="#{soliServController.telefono}"/>
+                                            </div>
+                                        </h:column>
+                                    </h:panelGrid>
+                                </div>
+                                <br></br>
+
+                                <div class="ui-fluid col-10">
+                                    <h:outputLabel class="mb-2" style="font-weight: 600" for="DireccInstal" value="Dirección del Cliente"/>
+                                    <p:inputTextarea id="DireccInstal" required="true" requiredMessage="Campo Obligatorio" value="#{soliServController.direccion}"/>
+                                </div> 
+                                <br/>
+
+                                <div class="ui-fluid col-10">
+                                    <h:outputLabel class="mb-2" style="font-weight: 600" for="Proyecto" value="Nombre del Proyecto"/>
+                                    <p:inputText id="Proyecto" required="true" requiredMessage="Campo Obligatorio" value="#{soliServController.proyecto}"/>
+                                </div> 
+                                <br/>
+
+                                <div class="ui-fluid col-10">
+                                    <h:outputLabel class="mb-2" style="font-weight: 600" for="NotasMue" value="Notas del Mueble (Agregar Tipo de Mueble, Espacio a Tratar y otras Notas Importantes)"/>
+                                    <p:inputTextarea id="NotasMue" required="true" requiredMessage="Campo Obligatorio" value="#{soliServController.notasMue}"/>
+                                </div> 
+                                <br/>
+
+                                <div class="ui-fluid col-10">
+                                    <h:outputLabel class="mb-2" style="font-weight: 600" for="NotasDise" value="Notas del Diseño del Mueble (Agregar Tipo de Material, Color del DiseÃ±o y otras Notas Importantes)"/>
+                                    <p:inputTextarea id="NotasDise" required="true" requiredMessage="Campo Obligatorio" value="#{soliServController.notasDise}"/>
+                                    <br/>
+                                    <br/>
+                                    <h:outputLabel class="mb-2" style="font-weight: 600" for="DiseClie" value="Diseño del Cliente" />
+                                    <p:fileUpload value="#{soliServController.file}" mode="simple" skinSimple="true" label="Seleccionar"/>
+                                </div> 
+                                <br/>
+
+                                <div class="ui-fluid col-10">
+                                    <h:outputLabel class="mb-2" style="font-weight: 600" for="NotasMedi" value="Notas de Medidas del Mueble(Agregar DescripciÃ³n de Medidas, Medidas Alto, Ancho, Fondo y otras Notas Importantes)"/>
+                                    <p:inputTextarea id="NotasMedi" required="true" requiredMessage="Campo Obligatorio" value="#{soliServController.notasMedi}"/>
+                                </div> 
+                                <br/>
+
+                                <div class="ui-fluid col-10">
+                                    <h:outputLabel class="mb-2" style="font-weight: 600" for="NotasElemen" value="Notas de Elementos (Agregar Tipo Elemento, Medidas Alto, Ancho, Fondo y otras Notas Importantes)"/>
+                                    <p:inputTextarea id="NotasElemen" required="true" requiredMessage="Campo Obligatorio" value="#{soliServController.notasElem}"/>
+                                </div> 
+                                <br/>
+
+                                <div class="ui-fluid col-2">
+                                    <p:commandButton value="Guardar Solicitud" styleClass="ui-button-success" ajax="true" actionListener="#{soliServController.uploadObject(projectId, bucketName, objectName, filePath, 1, 0, 0)}" action="#{soliServController.guardarInformacion()}"/>
+                                </div>
+
+                            </h:form>
+                        </div>
+                        <div class="card-footer">
+                            <span style="float: right">
+                                <p:commandButton value="Regresar a Solicitud de Servicio" id="devolver" styleClass="ui-button-secondary" ajax="true" onclick="location.href = '/SCFM/faces/ventas/SolicitudesServicio.xhtml';"/>
+                            </span>
+                        </div>
+                    </div>                   
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

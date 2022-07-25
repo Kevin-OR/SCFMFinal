@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:body>
+        <ui:composition template="./../resources/templates/plantillaAdmin.xhtml">
+            <ui:define name="content">
+                <h:form enctype="multipart/form-data">
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Revisar Calidad del Cliente</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a href="/SCFM/faces/inicio.xhtml">Inicio</a></li>
+                            <li class="breadcrumb-item"><a href="/SCFM/faces/calidad/RevisarCalidad.xhtml">Revisión de Calidad</a></li>
+                            <li class="breadcrumb-item active">Revisar Calidad del Cliente</li>
+                        </ol>
+                        
+<div class="card mb-4">
+                            <div class="card-header">
+                                <h:panelGrid columns="2">
+                                    <h:column>
+                                        <h:outputLabel class="mb-2" style="font-weight: 600" for="soli" value="Solicitud de Servicio" /> 
+                                    </h:column>
+                                    <h:column>
+                                        <div class="mx-2">
+                                            <p:inputText id="soli" value="SS-#{calidadController.idSoliServ}" size="10" disabled="true" />
+                                        </div>
+                                    </h:column>
+                                </h:panelGrid>
+                            </div>
+                            <div class="card-body">
+                                
+                                <div class="ui-fluid col-10">
+                                    <h:outputLabel class="mb-2" style="font-weight: 600" for="Proyecto" value="Nombre del Proyecto"/>
+                                    <p:inputText id="Proyecto" required="true" requiredMessage="Campo Obligatorio" value="#{calidadController.proyecto}" disabled="true"/>
+                                </div> 
+                                <br/>
+
+                                <div class="ui-fluid col-10">
+                                    <h:outputLabel class="mb-2" style="font-weight: 600" for="NotasMue" value="Notas del Mueble (Agregar Tipo de Mueble, Espacio a Tratar y otras Notas Importantes)"/>
+                                    <p:inputTextarea id="NotasMue" required="true" value="#{calidadController.notasMue}" disabled="true"/>
+                                </div> 
+                                <br/>
+
+                                <div class="ui-fluid col-10">
+                                    <h:outputLabel class="mb-2" style="font-weight: 600" for="NotasDise" value="Notas del Diseño del Mueble (Agregar Tipo de Material, Color del Diseño y otras Notas Importantes)"/>
+                                    <p:inputTextarea id="NotasDise" required="true" value="#{calidadController.notasDise}" disabled="true"/>
+                                    <br/>
+                                    <br/>
+                                    <h:outputLabel class="mb-2" style="font-weight: 600" for="DiseñoClie" value="Diseño del Cliente" />
+                                    
+                                    <img id="DiseñoClie" src="#{calidadController.disenoCli}" width="900" />
+                                    
+                                </div> 
+                                <br/>
+
+                                <div class="ui-fluid col-10">
+                                    <h:outputLabel class="mb-2" style="font-weight: 600" for="NotasMedi" value="Notas de Medidas del Mueble(Agregar Descripción de Medidas, Medidas Alto, Ancho, Fondo y otras Notas Importantes)"/>
+                                    <p:inputTextarea id="NotasMedi" required="true" value="#{calidadController.notasMedi}" disabled="true"/>
+                                </div> 
+                                <br/>
+
+                                <div class="ui-fluid col-10">
+                                    <h:outputLabel class="mb-2" style="font-weight: 600" for="NotasElemen" value="Notas de Elementos (Agregar Tipo Elemento, Medidas Alto, Ancho, Fondo y otras Notas Importantes)"/>
+                                    <p:inputTextarea id="NotasElemen" required="true" value="#{calidadController.notasElem}" disabled="true"/>
+                                </div> 
+                                <br/>
+
+                                
+                        </div>
+                            <div class="card-body">
+                                <div class="ui-fluid">
+                                    <h:panelGrid columns="2" > 
+                                        <h:column>
+                                            <h:outputLabel class="mb-2" style="font-weight: 600" for="EncarCali" value="Encargado de Revisión"/>
+                                            <br></br>
+                                            <h:selectOneMenu class="mb-1" style="font-weight: 600; width:200px; height:40px; border-radius: 5px; border-color: #bcbebf"  value="#{calidadController.encarCli}">
+                                                <f:selectItem itemLabel="Seleccionar" itemValue="0"/>
+                                                <f:selectItems value="#{IngresaPersonaController.encargadoCa}" var="EncarC" itemLabel="#{EncarC.nombrePerso}" itemValue="#{EncarC.idPersona}"/>
+                                            </h:selectOneMenu>
+                                        </h:column>
+                                        <h:column>        
+                                            <div class="mx-4">
+                                                <h:outputLabel class="mb-2" style="font-weight: 600" for="DiseClie" value="Evidencia de la Calidad" />
+                                            <p:fileUpload value="#{ImController.file}" mode="simple" skinSimple="true" label="Seleccionar"/>
+                                            </div>
+                                        </h:column>
+                                    </h:panelGrid>
+                                </div>
+                                <br></br>
+                                <div class="ui-fluid">
+                                    <h:panelGrid columns="2">
+                                        <h:column>
+                                            <p:commandButton id="Acep" value="Aceptar Calidad" ajax="true" actionListener="#{ImController.uploadObject(projectId, bucketName, objectName, filePath,5,calidadController.idSoliServ,calidadController.idOt)}" action="#{calidadController.CrearCali(1)}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <div class="mx-4">
+                                                <button type="button" class="btn btn-danger btn-sm" style=" font-size: 100%; width:150px; height:40px;" data-bs-toggle="collapse" data-bs-target="#Rechac_CAC" aria-expanded="false" aria-controls="Rechac_CAC">Rechazar Calidad</button>                                            
+                                            </div>
+                                        </h:column>
+                                    </h:panelGrid>
+                                </div> 
+                                <br/>
+
+                                <div class="collapse" id="Rechac_CAC">
+                                    <div class="ui-fluid">
+                                        <h:outputLabel class="mb-2" style="font-weight: 600" for="Justif_Rech_CAC" value="Justificación del Rechazo de la Calidad del Cliente" />
+                                    </div>
+                                    <div class="ui-fluid col-10">
+                                        <p:inputText  id="Justif_Rech_CAC" placeholder="Escribir justifación del rechazo" value="#{calidadController.justifiCli}"/>
+                                    </div>
+                                    <br/>
+                                    <div class="ui-fluid col-2">
+                                        <p:commandButton id="GuJusCAC" value="Guardar Justificación" ajax="true" styleClass="ui-button-info" actionListener="#{ImController.uploadObject(projectId, bucketName, objectName, filePath,5,calidadController.idSoliServ,calidadController.idOt)}" action="#{calidadController.CrearCali(2)}"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-footer">
+                                <span style="float: right">
+                                    <p:commandButton value="Regresar a Revisión Calidad" id="devolver" styleClass="ui-button-secondary" ajax="true" onclick="location.href = '/SCFM/faces/calidad/RevisarCalidad.xhtml';"/>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

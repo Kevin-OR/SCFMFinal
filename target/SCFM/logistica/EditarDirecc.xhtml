@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <ui:composition template="./../resources/templates/plantillaAdmin.xhtml">
+            <ui:define name="content">
+                
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Actualizar Dirección</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a href="/SCFM/faces/inicio.xhtml">Inicio</a></li>
+                            <li class="breadcrumb-item"><a href="/SCFM/faces/logistica/Direccion.xhtml">Dirección de Instalación</a></li>
+                            <li class="breadcrumb-item active">Actualizar Dirección</li>
+                        </ol>
+
+                        <div class="card mb-4">
+                            <h:form>
+                            <div class="card-header">
+                                <div class="ui-fluid">
+                                    <h:panelGrid columns="2">
+                                        <h:column>
+                                            <h:outputLabel class="mb-2" style="font-weight: 600" for="soli" value="Orden de Trabajo" /> 
+                                        </h:column>
+                                        <h:column>
+                                            <div class="mx-2">
+                                                <p:inputText id="soli" value="OT-#{logiController.idOt}" size="10" disabled="true" />
+                                            </div>
+                                        </h:column>
+                                    </h:panelGrid>
+                                    <h:inputHidden value="#{logiController.idSoliServ}"/>
+                                </div>
+                            </div>
+</h:form>
+                            <div class="card-body">
+                                <h:form>
+                                <div class="ui-fluid col-9">
+                                    <h:outputLabel class="mb-2" style="font-weight: 600" value="Dirección de Instalación" />
+                                    <p:inputText id="direccion" value="#{logiController.direccion}" required="true" requiredMessage="Campo Obligatorio" />
+                                </div> 
+                                <br></br>
+
+                                <div class="ui-fluid">
+                                    
+                                        <h:panelGrid columns="2">
+                                            <h:column>
+                                                <div>
+                                                    <p:commandButton id="guardar" value="Aceptar Dirección" ajax="true" action="#{logiController.aceptarDirecc()}"/>
+                                                </div>
+                                            </h:column>
+                                            <h:column>
+                                                <div class="mx-3">
+                                                    <p:commandButton value="Actualizar Dirección" styleClass="ui-button-success" ajax="true" action="#{logiController.actualizarDirecc()}" />
+                                                </div>
+                                            </h:column>
+                                        </h:panelGrid>
+                                    
+                                </div>
+                                </h:form>
+                            </div>
+
+                            <div class="card-footer">
+                                <span style="float: right">
+                                    <p:commandButton value="Regresar a Dirección" id="devolver" styleClass="ui-button-secondary" ajax="true" onclick="location.href = '/SCFM/faces/logistica/Direccion.xhtml';"/>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

@@ -1,0 +1,419 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <h:outputStylesheet library="css" name="styles.css"/>
+        <h:outputScript name="scripts.js" library="js"/>
+        <title>MDTek</title>
+        <f:event type="preRenderView" listener="#{plantillaController.verifiSesion()}"/>
+        <link
+            href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css"
+            rel="stylesheet"/>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css" rel="stylesheet"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/rowreorder/1.2.8/css/rowReorder.dataTables.min.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css" rel="stylesheet" />
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"
+        crossorigin="anonymous"></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+    </h:head>
+
+    <h:body>
+
+        <div>
+            <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+                <!-- Navbar Brand-->
+                <a class="navbar-brand ps-3" style="color: white" href="/SCFM/faces/inicio.xhtml">
+                    <h:graphicImage library="images" name="verde.png"  style="width: 110px; height: 54px; "/>
+                </a>
+
+                <!-- Sidebar Toggle-->
+                <button
+                    class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
+                    id="sidebarToggle"
+                    href="#!">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <!-- Navbar Search-->
+                <form
+                    class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+                    <div class="input-group">
+                    </div>
+                </form>
+
+                <!-- Navbar-->
+                <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                    <li class="nav-item dropdown">
+                        <a
+                            class="nav-link dropdown-toggle"
+                            id="navbarDropdown"
+                            href="#"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <i class="fas fa-bell"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" style="background: #333333" aria-labelledby="navbarDropdown">
+
+                            <div class="noti">
+                                <div class="conte">
+                                    <div class="texto">
+                                        <p>Nueva Solicitud de Servicio
+                                            <a class="texto" href="/SCFM/faces/inicio.xhtml">
+                                                <span>Area de Ventas</span>
+                                            </a>
+                                        </p>
+                                        <span class="tiem">10 minutes ago</span>
+                                    </div>
+                                </div>
+
+                                <div class="conte">
+                                    <div class="texto">
+                                        <p>Nueva Orden de Servicio
+                                            <a class="texto" href="/SCFM/faces/inicio.xhtml">
+                                                <span>Area de Ventas</span>
+                                            </a>
+                                        </p>
+                                        <span class="tiem">15 minutes ago</span>
+                                    </div>
+                                </div>
+
+                                <div class="conte">
+                                    <div class="texto">
+                                        <p>Nueva Orden de compra
+                                            <a class="texto" href="/SCFM/faces/inicio.xhtml">
+                                                <span>Area de Producción</span>
+                                            </a>
+                                        </p>
+                                        <span class="tiem">30 minutes ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a
+                            class="nav-link dropdown-toggle"
+                            id="navbarDropdown"
+                            href="#"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <i class="fas fa-user fa-fw"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li>
+                                <h:form id="cerra">
+                                    <div align="center" >
+                                        <p:commandButton  actionListener="#{personaController.cerrar()}" style="width:155px" styleClass="ui-button-danger" ajax="false" value="Cerrar Sesión" action="/index?faces-redirect=true" />
+                                    </div>
+                                </h:form>
+
+                                <a class="dropdown-item"  href="/SCFM/faces/CambioContra.xhtml">Cambiar contraseña</a>
+
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <div id="layoutSidenav">
+                <div id="layoutSidenav_nav">
+                    <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                        <div class="sb-sidenav-menu">
+                            <div class="nav">
+                                <div class="sb-sidenav-menu-heading">Menú</div>
+                                <a class="nav-link" href="/SCFM/faces/inicio.xhtml">
+                                    <div class="sb-nav-link-icon">
+                                        <i class="fas fa-home"></i>
+                                    </div>
+                                    Inicio
+                                </a>
+
+                                <div class="sb-sidenav-menu-heading">Módulos</div>
+
+
+                                <h:panelGroup>
+                                    <a
+                                        class="nav-link collapsed"
+                                        href="#"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#collapseVenta"
+                                        aria-expanded="false"
+                                        aria-controls="collapseVenta">
+                                        <div class="sb-nav-link-icon">
+                                            <i class="fas fa-edit"></i>
+                                        </div>
+                                        Venta
+                                        <div class="sb-sidenav-collapse-arrow">
+                                            <i class="fas fa-angle-down"></i>
+                                        </div>
+                                    </a>
+
+                                    <div
+                                        class="collapse"
+                                        id="collapseVenta"
+                                        aria-labelledby="headingOne"
+                                        data-bs-parent="#sidenavAccordion">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <h:panelGroup rendered="#{(personLog.idRol == 1) or (personLog.idRol == 2)}" >
+                                                <a class="nav-link" href="/SCFM/faces/ventas/OrdenServicio.xhtml">Orden de Servicio</a>
+                                                <a class="nav-link" href="/SCFM/faces/ventas/SolicitudesServicio.xhtml">Solicitud de Servicio</a>
+                                            </h:panelGroup>
+                                            <h:panelGroup rendered="#{(personLog.idRol == 1) or (personLog.idRol == 4)}" >
+                                                <a class="nav-link" href="/SCFM/faces/ventas/DiseñosFinales.xhtml">Subir Diseño Final</a>
+                                            </h:panelGroup>
+                                            <h:panelGroup rendered="#{(personLog.idRol == 1)}" >
+                                                <a class="nav-link" href="/SCFM/faces/ventas/Cotizacion.xhtml">Cotización</a>
+                                            </h:panelGroup>
+                                            <h:panelGroup rendered="#{(personLog.idRol == 1) or (personLog.idRol == 2)}" >
+                                                <a class="nav-link" href="/SCFM/faces/ventas/PrecioVenta.xhtml">Precio Venta</a>
+                                            </h:panelGroup>
+                                            <h:panelGroup rendered="#{(personLog.idRol == 1) or (personLog.idRol == 3)}" >
+                                                <a class="nav-link" href="/SCFM/faces/ventas/OrdenTrabajo.xhtml">Orden de trabajo</a>
+                                            </h:panelGroup>
+                                            <h:panelGroup rendered="#{(personLog.idRol == 1)}" >
+                                                <a class="nav-link" href="/SCFM/faces/ventas/Cotiz_Proveed.xhtml">Cotización del Provedor</a>
+                                            </h:panelGroup>
+                                        </nav>
+                                    </div>
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{(personLog.idRol != 2)}">
+
+
+
+                                    <a
+                                        class="nav-link collapsed"
+                                        href="#"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#collapseProduccion"
+                                        aria-expanded="false"
+                                        aria-controls="collapseProduccion">
+                                        <div class="sb-nav-link-icon">
+                                            <i class="fas fa-cogs"></i>
+                                        </div>
+                                        Producción
+                                        <div class="sb-sidenav-collapse-arrow">
+                                            <i class="fas fa-angle-down"></i>
+                                        </div>
+                                    </a>
+
+                                    <div
+                                        class="collapse"
+                                        id="collapseProduccion"
+                                        aria-labelledby="headingOne"
+                                        data-bs-parent="#sidenavAccordion">
+                                        <nav class="sb-sidenav-menu-nested nav">
+
+                                            <h:panelGroup rendered="#{(personLog.idRol == 1) or (personLog.idRol == 3)}" >
+                                                <a class="nav-link" href="/SCFM/faces/produccion/OrdenTrabajoPro.xhtml">Orden de Trabajo</a>
+                                            </h:panelGroup>
+                                            <h:panelGroup rendered="#{personLog.idRol == 1}" >
+                                                <a class="nav-link" href="/SCFM/faces/produccion/OrdenesCompra.xhtml">Orden de Compra</a>
+                                            </h:panelGroup>
+                                            <h:panelGroup rendered="#{personLog.idRol != 2}" >
+                                                <a class="nav-link" href="/SCFM/faces/produccion/MenuCronograma.xhtml">Cronograma</a>
+                                            </h:panelGroup>
+                                            <h:panelGroup rendered="#{(personLog.idRol == 1) or (personLog.idRol == 3)}" >
+                                                <a class="nav-link" href="/SCFM/faces/produccion/ManodeObra.xhtml">Mano de Obra</a>
+                                            </h:panelGroup>
+
+                                        </nav>
+                                    </div>
+
+
+                                </h:panelGroup>
+
+
+                                <h:panelGroup rendered="#{personLog.idRol == 1}" >
+
+                                    <a
+                                        class="nav-link collapsed"
+                                        href="#"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#collapseCalidad"
+                                        aria-expanded="false"
+                                        aria-controls="collapseCalidad">
+                                        <div class="sb-nav-link-icon">
+                                            <i class="fas fa-clipboard-check"></i>
+                                        </div>
+                                        Calidad
+                                        <div class="sb-sidenav-collapse-arrow">
+                                            <i class="fas fa-angle-down"></i>
+                                        </div>
+                                    </a>
+
+                                    <div
+                                        class="collapse"
+                                        id="collapseCalidad"
+                                        aria-labelledby="headingOne"
+                                        data-bs-parent="#sidenavAccordion">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="/SCFM/faces/calidad/RevisarCalidad.xhtml">Revisar Calidad</a>
+                                            <a class="nav-link" href="/SCFM/faces/calidad/OrdenRepaCa.xhtml">Orden de Reparación</a>
+                                        </nav>
+                                    </div>
+
+
+                                </h:panelGroup>
+
+
+                                <h:panelGroup rendered="#{(personLog.idRol == 1) or (personLog.idRol == 4)}" >
+
+                                    <a
+                                        class="nav-link collapsed"
+                                        href="#"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#collapseLogistica"
+                                        aria-expanded="false"
+                                        aria-controls="collapseLogistica">
+                                        <div class="sb-nav-link-icon">
+                                            <i class="fas fa-truck"></i>
+                                        </div>
+                                        Logística
+                                        <div class="sb-sidenav-collapse-arrow">
+                                            <i class="fas fa-angle-down"></i>
+                                        </div>
+                                    </a>
+
+                                    <div
+                                        class="collapse"
+                                        id="collapseLogistica"
+                                        aria-labelledby="headingOne"
+                                        data-bs-parent="#sidenavAccordion">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="/SCFM/faces/logistica/Direccion.xhtml">Dirección</a>
+                                            <a class="nav-link" href="/SCFM/faces/logistica/InstaMueble.xhtml">Instalación Mueble</a>
+
+                                            <h:panelGroup rendered="#{personLog.idRol == 1}" >
+                                                <a class="nav-link" href="/SCFM/faces/logistica/OrdenRepaLo.xhtml">Orden de Reparación</a>
+                                            </h:panelGroup>
+
+                                        </nav>
+                                    </div>
+
+                                </h:panelGroup>
+
+                                <h:panelGroup rendered="#{(personLog.idRol == 1) or (personLog.idRol == 2)}" >
+                                    <a
+                                        class="nav-link collapsed"
+                                        href="#"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#collapseGarantia"
+                                        aria-expanded="false"
+                                        aria-controls="collapseGarantia">
+                                        <div class="sb-nav-link-icon">
+                                            <i class="fas fa-certificate"></i>
+                                        </div>
+                                        Garantía
+                                        <div class="sb-sidenav-collapse-arrow">
+                                            <i class="fas fa-angle-down"></i>
+                                        </div>
+                                    </a>
+
+                                    <div
+                                        class="collapse"
+                                        id="collapseGarantia"
+                                        aria-labelledby="headingOne"
+                                        data-bs-parent="#sidenavAccordion">
+                                        <nav class="sb-sidenav-menu-nested nav">
+
+                                            <a class="nav-link" href="/SCFM/faces/garantia/OrdenGarantia.xhtml">Orden de Garantía</a>
+
+                                            <h:panelGroup rendered="#{personLog.idRol != 2}" >
+                                                <a class="nav-link" href="/SCFM/faces/garantia/OrdenRepaGa.xhtml">Orden de Reparación</a>
+                                                <a class="nav-link" href="/SCFM/faces/garantia/VerGarantia.xhtml">Garantías</a>
+                                            </h:panelGroup>
+                                        </nav>
+                                    </div>
+
+                                </h:panelGroup>
+
+
+
+
+
+                                <h:panelGroup rendered="#{personLog.idRol == 1}" >
+                                    <a
+                                        class="nav-link collapsed"
+                                        href="#"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#collapseInventario"
+                                        aria-expanded="false"
+                                        aria-controls="collapseInventario">
+                                        <div class="sb-nav-link-icon">
+                                            <i class="fas fa-list-alt"></i>
+                                        </div>
+                                        Inventario
+                                        <div class="sb-sidenav-collapse-arrow">
+                                            <i class="fas fa-angle-down"></i>
+                                        </div>
+                                    </a>
+
+                                    <div
+                                        class="collapse"
+                                        id="collapseInventario"
+                                        aria-labelledby="headingOne"
+                                        data-bs-parent="#sidenavAccordion">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="/SCFM/faces/inventario/InvenMaterial.xhtml">Materiales</a>
+                                            <a class="nav-link" href="/SCFM/faces/inventario/InvenPersonal.xhtml">Listado Personal</a>
+
+                                        </nav>
+                                    </div>
+
+
+
+
+
+
+                                    <a class="nav-link collapsed" href="#"  data-bs-toggle="collapse" data-bs-target="#collapseAcceso" aria-expanded="false" aria-controls="collapseAcceso">
+                                        <div class="sb-nav-link-icon"><i class="fas fa-id-card"></i></div>
+                                        Acceso
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse" id="collapseAcceso" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="/SCFM/faces/acceso/InvenAcceso.xhtml">Control</a>
+                                        </nav>
+                                    </div>
+                                </h:panelGroup>
+
+
+
+
+                            </div>
+                        </div>
+
+                        <div class="sb-sidenav-footer">
+                            <div class="small" style="color: white">Sesión como:</div>
+                            <font face="verdana">${personLog.nombrePerso} ${personLog.priApellido} ${personLog.segApellido}</font>
+                        </div>
+                    </nav>
+                </div>
+
+                <div id="layoutSidenav_content" >
+                    <ui:insert name="content" >Content</ui:insert>
+                </div>
+            </div>
+        </div>
+    </h:body>
+</html>

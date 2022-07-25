@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./resources/templates/plantillaAdmin.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <ui:define name="content">
+        <main>
+            <h:form>
+                <p:growl id="gro" showDetail="true" />
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Cambiar Contraseña</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item">
+                            <a href="/SCFM/faces/inicio.xhtml">Inicio</a>
+                        </li>
+                        <li class="breadcrumb-item active">Cambiar Contraseña</li>
+                    </ol>
+
+                    <div class="card mb-4">
+                        <div class="card-body">
+
+                            <div class="ui-fluid col-4">
+                                <h:outputLabel class="mb-2" style="font-weight: 600" value="Contraseña Actual" />
+                                <p:password id="ContrActual" value="#{clave}" toggleMask="true" redisplay="true" required="true" requiredMessage="Llenar Espacio" />
+                                <h:message for="ContrActual" class="text-danger"/>
+                            </div>
+                            <br></br>
+
+                            <div class="ui-fluid col-4">
+                                <h:outputLabel class="mb-2" style="font-weight: 600" value="Nueva Contraseña" />
+                                
+                                <p:password id="NueActual" value="#{Nueclave}" toggleMask="true" redisplay="true" required="true" requiredMessage="Llenar Espacio" />
+                                <h:message for="NueActual" class="text-danger"/>
+                            </div>
+                            <br></br>
+
+                            <div class="ui-fluid col-4">
+                                <h:outputLabel class="mb-2" style="font-weight: 600" value="Confirmar Nueva Contraseña" />
+                                <p:password id="CoNueActual" value="#{CoNueclave}" toggleMask="true" redisplay="true" required="true" requiredMessage="Llenar Espacio" />
+                                <h:message for="CoNueActual" class="text-danger"/>
+                            </div>
+                            <br></br>
+
+
+                            
+                            <h:panelGrid columns="2">
+                                <h:column>
+                                    <div class="ui-fluid">
+
+                                        <p:commandButton value="Guardar Cambio" ajax="false" action="#{recuperaContraController.modificaContra(personLog.nomUsuario, clave, Nueclave, CoNueclave)}"/>
+
+                                    </div>
+                                </h:column>
+                                <h:column>
+                                    <div  class="mx-3">
+                                        <p:commandButton value="Regresar" styleClass="ui-button-danger"  onclick="location.href = '/SCFM/faces/Inicio.xhtml';"/>
+                                    </div>
+                                </h:column>
+                            </h:panelGrid>
+                        </div>
+                    </div>
+                </div>
+                
+            </h:form>
+        </main>
+    </ui:define>
+
+</ui:composition>

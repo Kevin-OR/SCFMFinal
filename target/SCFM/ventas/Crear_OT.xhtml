@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:body>
+        <ui:composition template="./../resources/templates/plantillaAdmin.xhtml">
+            <ui:define name="content">
+                <h:form>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Nueva Orden de Trabajo</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item">
+                                <a href="/SCFM/faces/inicio.xhtml">Inicio</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="/SCFM/faces/ventas/OrdenTrabajo.xhtml">Ordenes de Trabajo</a>
+                            </li>
+                            <li class="breadcrumb-item active">Nueva Orden de Trabajo</li>
+                        </ol>
+
+                        <div class="card mb-4">
+                            <div class="card-body">
+
+                                <div class="ui-fluid">
+                                    <h:panelGrid columns="2">
+                                        <h:column>
+                                            <h:outputLabel class="mb-1" style="font-weight: 600" for="SS" value="Solicitud de Servicio"/>
+                                        </h:column>
+                                        <h:column>
+                                            <div class="mx-2">
+                                                <h:selectOneMenu class="mb-1" style="font-weight: 600; width:150px; height:40px; border-radius: 5px; border-color: #bcbebf"  value="#{OTController.idOtordenservicio}">
+                                                    <f:selectItem itemLabel="Seleccionar" itemValue="0"/>
+                                                    <f:selectItems value="#{OTController.sol}" var="SS" itemLabel="SS-#{SS.idSoli}" itemValue="#{SS.idSoli}"/>
+                                                </h:selectOneMenu>
+                                            </div>
+                                        </h:column>
+                                    </h:panelGrid>
+                                </div>
+                                <br></br>
+
+                                <div class="ui-fluid">
+                                    <h:panelGrid columns="2">
+
+                                        <h:column>
+                                            <h:outputLabel class="mb-2" style="font-weight: 600" for="Fec_Inicio_OT" value="Fecha de Inicio de Orden" />
+                                            <p:inputText type="date" id="Fec_Inicio_OT" value="#{OTController.fechaIni}" required="true" requiredMessage="Campo Obligatorio" />
+                                            <h:message for="Fec_Inicio_OT" class="text-danger"/>
+                                        </h:column>
+                                        <h:column>
+                                            <div class="mx-4">
+                                                <h:outputLabel class="mb-2" style="font-weight: 600" for="Fec_Final_OT" value="Fecha de Finalización de Orden" />
+                                                <p:inputText type="date" id="Fec_Final_OT" value="#{OTController.fechaEntre}" required="true" requiredMessage="Campo Obligatorio" />
+                                                <h:message for="Fec_Final_OT" class="text-danger"/>
+                                            </div>
+                                        </h:column>
+
+                                    </h:panelGrid>
+                                </div>
+                                <br></br>
+
+                                <div class="ui-fluid">
+                                    <h:panelGrid columns="2">
+                                        <h:column>
+                                            <div>
+                                                <p:commandButton id="guardar" value="Guardar  Orden Trabajo" ajax="true" styleClass="ui-button-success"  action="#{OTController.guardarInformacion()}" />
+                                            </div>
+                                        </h:column>
+                                        <h:column>
+                                            <div  class="mx-3">
+                                                <p:commandButton value="Cancelar" styleClass="ui-button-danger"  onclick="location.href = '/SCFM/faces/ventas/OrdenTrabajo.xhtml';"/>
+                                            </div>
+                                        </h:column>
+                                    </h:panelGrid>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

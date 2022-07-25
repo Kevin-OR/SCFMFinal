@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:body>
+        <ui:composition template="./../resources/templates/plantillaAdmin.xhtml">
+            <ui:define name="content">
+                <h:form>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Editar Orden de Servicio</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a href="/SCFM/faces/inicio.xhtml">Inicio</a></li>
+                            <li class="breadcrumb-item"><a href="/SCFM/faces/ventas/OrdenServicio.xhtml">Orden de Servicio</a></li>
+                            <li class="breadcrumb-item active">Editar Orden de Servicio</li>
+                        </ol>
+
+                        <div class="card mb-4">
+                            <div class="card-body">
+
+                                <div class="ui-fluid col-9">
+                                    <h:inputHidden value="#{verDatos.idOrdenSer}"/>
+                                    <h:outputLabel class="mb-2" style="font-weight: 600" for="Cliente" value="Cliente"/>
+                                    <p:inputText id="cliente" value="#{verDatos.cliente}" required="true" requiredMessage="Campo Obligatorio" />
+                                    <h:message for="cliente" class="text-danger"/>
+                                </div>
+                                <br></br>
+
+                                <div class="ui-fluid">
+                                    <h:panelGrid columns="2" > 
+                                        <h:column>
+                                            <h:outputLabel class="mb-2" style="font-weight: 600" for="Visitante 1" value="Visitante 1"/>
+                                            <p:selectOneMenu value="#{verDatos.visitaUno}">
+                                                <f:selectItem itemLabel="Visitante 1" itemValue="1"/>
+                                                <f:selectItem itemLabel="Visitante 2" itemValue="2"/>
+                                            </p:selectOneMenu>
+                                        </h:column>
+                                        <h:column>
+                                            <div class="mx-4">
+                                                <h:outputLabel class="mb-2" style="font-weight: 600" for="Visitante 2" value="Visitante 2"/>
+                                                <p:selectOneMenu value="#{verDatos.visitaDos}">
+                                                    <f:selectItem itemLabel="Arquitecto 1" itemValue="1"/>
+                                                    <f:selectItem itemLabel="Arquitecto 2" itemValue="2"/>
+                                                </p:selectOneMenu>
+                                            </div>
+                                        </h:column>
+                                    </h:panelGrid>
+                                </div>
+                                <br></br>
+
+                                <div class="ui-fluid col-9">
+                                    <h:outputLabel class="mb-2" style="font-weight: 600" for="Dirección" value="Dirección"/>
+                                    <p:inputTextarea id="direccion" value="#{verDatos.direccion}" required="true" requiredMessage="Campo Obligatorio" />
+                                    <h:message for="direccion" class="text-danger"/>
+                                </div> 
+                                <br></br>
+
+                                <div class="ui-fluid">
+                                    <h:panelGrid columns="3">
+                                        <h:column>
+                                            <h:outputLabel class="mb-2" style="font-weight: 600" for="Fecha Visita" value="Fecha Visita"/>
+                                            <p:inputText type="date" id="fechaVisita" value="#{verDatos.fechaVisi}" required="true" requiredMessage="Campo Obligatorio" />
+                                            <h:message for="fechaVisita" class="text-danger"/>
+                                        </h:column>
+                                        <h:column>
+                                            <div class="mx-4">
+                                                <h:outputLabel class="mb-2" style="font-weight: 600" for="Hora Visita" value="Hora Visita"/>
+                                                <p:inputText type="time" id="horaVisita" value="#{verDatos.horaVisi}" required="true" requiredMessage="Campo Obligatorio"/>
+                                                <h:message for="horaVisita" class="text-danger"/>
+                                            </div>
+                                        </h:column>
+                                        <h:column>
+                                            <h:outputLabel class="mb-2" style="font-weight: 600" for="idEspacio" value="Espacio a tratar" />
+                                            <p:selectOneMenu id="idEspacio" value="#{verDatos.idEspacio}">
+                                                <f:selectItems value="#{espacioController.espacios}" var="Espac" itemLabel="#{Espac.espacio}" itemValue="#{Espac.idEspacio}"/>
+                                            </p:selectOneMenu>
+                                        </h:column>
+                                    </h:panelGrid>
+                                </div>
+                                <br></br>
+
+                                <div class="ui-fluid col-9">
+                                    <h:outputLabel class="mb-2" style="font-weight: 600" for="Tipo de Muestras" value="Tipo de Muestras"/>
+                                    <p:inputTextarea id="TipoMuestras" value="#{verDatos.muestra}" required="true" requiredMessage="Campo Obligatorio"/>
+                                    <h:message for="TipoMuestras" class="text-danger"/>
+                                </div>
+                                <br></br>
+
+                                <div class="ui-fluid col-2">
+                                    <h:column rendered="#{(personLog.idRol == 1)}">
+                                        <h:outputLabel class="mb-2" style="font-weight: 600" for="estado" value="Estado"/>
+                                        <p:selectOneMenu id="estado" value="#{verDatos.estado}">
+                                            <f:selectItem itemLabel="No Realizada" itemValue="No Realizada"/>
+                                            <f:selectItem itemLabel="Realizada" itemValue="Realizada"/>
+                                        </p:selectOneMenu>
+                                    </h:column>
+                                </div>
+                                <br></br>
+
+                                <div class="ui-fluid">
+                                    <h:panelGrid columns="2">
+                                        <h:column>
+                                            <div>
+                                                <p:commandButton value="Guardar" ajax="false" styleClass="ui-button-success" action="#{verDatos.modifica()}"/>
+                                            </div>
+                                        </h:column>
+                                        <h:column>
+                                            <div  class="mx-3">
+                                                <p:commandButton value="Cancelar" styleClass="ui-button-danger"  onclick="location.href = '/SCFM/faces/ventas/OrdenServicio.xhtml';"/>
+                                            </div>
+                                        </h:column>
+                                    </h:panelGrid>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

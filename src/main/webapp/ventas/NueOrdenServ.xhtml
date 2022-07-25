@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:body>
+        <ui:composition template="./../resources/templates/plantillaAdmin.xhtml">
+            <ui:define name="content">
+                <h:form>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Nueva Orden de Servicio</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a href="/SCFM/faces/inicio.xhtml">Inicio</a></li>
+                            <li class="breadcrumb-item"><a href="/SCFM/faces/ventas/OrdenServicio.xhtml">Orden de Servicio</a></li>
+                            <li class="breadcrumb-item active">Nueva Orden de Servicio</li>
+                        </ol>
+
+                        <div class="card mb-4">
+                            <div class="card-body">
+
+                                <div class="ui-fluid col-9">
+                                    <h:outputLabel class="mb-2" style="font-weight: 600" value="Nombre de Cliente" />
+                                    <p:inputText id="cliente"  value="#{verDatos.cliente}" required="true" requiredMessage="Nombre de Cliente Obligatorio"/>
+                                    <h:message for="cliente" class="text-danger"/>
+                                </div>
+                                <br></br>
+
+                                <div class="ui-fluid">
+                                    <h:panelGrid columns="2" > 
+                                        <h:column>
+                                            <h:outputLabel class="mb-2" style="font-weight: 600" for="visitaUno" value="Visitante 1"/>
+                                            <br></br>
+                                            <h:selectOneMenu class="mb-1" style="font-weight: 600; width:200px; height:40px; border-radius: 5px; border-color: #bcbebf" value="#{verDatos.visitaUno}">
+                                               <f:selectItem itemLabel="Seleccionar" itemValue="0"/>
+                                                <f:selectItems value="#{IngresaPersonaController.encargadoCa}" var="EncarC" itemLabel="#{EncarC.nombrePerso}" itemValue="#{EncarC.idPersona}"/>
+
+                                            </h:selectOneMenu>
+                                        </h:column>
+                                        <h:column>
+                                            <div class="mx-4">
+                                                <h:outputLabel class="mb-2" style="font-weight: 600" for="visitaDos" value="Visitante 2" />
+                                                <br></br>
+                                                <h:selectOneMenu class="mb-1" style="font-weight: 600; width:200px; height:40px; border-radius: 5px; border-color: #bcbebf" value="#{verDatos.visitaDos}">
+                                                    <f:selectItem itemLabel="Seleccionar" itemValue="0"/>
+                                                <f:selectItems value="#{IngresaPersonaController.encargadoCa}" var="EncarC" itemLabel="#{EncarC.nombrePerso}" itemValue="#{EncarC.idPersona}"/>
+
+                                                </h:selectOneMenu>
+                                            </div>
+                                        </h:column>
+                                    </h:panelGrid>
+                                </div>
+                                <br></br>
+
+                                <div class="ui-fluid col-9">
+                                    <h:outputLabel class="mb-2" style="font-weight: 600" value="Dirección de Visita" />
+                                    <p:inputText id="direccion" value="#{verDatos.direccion}" required="true" requiredMessage="Campo Obligatorio" />
+                                    <h:message for="direccion" class="text-danger"/>
+                                </div> 
+                                <br></br>
+
+                                <div class="ui-fluid">
+                                    <h:panelGrid columns="3">
+                                        <h:column>
+                                            <h:outputLabel class="mb-2" style="font-weight: 600" value="Fecha de Visita" />
+                                            <p:inputText type="date" id="fechaVisi" value="#{verDatos.fechaVisi}" required="true" requiredMessage="Campo Obligatorio" />
+                                            <h:message for="fechaVisi" class="text-danger"/>
+                                        </h:column>
+                                        <h:column>
+                                            <div class="mx-4">
+                                                <h:outputLabel class="mb-2" style="font-weight: 600" for="horaVisi" value="Hora de Visita" />
+                                                <p:inputText type="time" id="horaVisi" value="#{verDatos.horaVisi}" required="true" requiredMessage="Campo Obligatorio"/>
+                                                <h:message for="horaVisi" class="text-danger"/>
+                                            </div>
+                                        </h:column>
+                                        <h:column>
+                                            <h:outputLabel class="mb-2" style="font-weight: 600" for="idEspacio" value="Espacio a Tratar" />
+                                            <br></br>
+                                            <h:selectOneMenu id="idEspacio" class="mb-1" style="font-weight: 600; width:200px; height:40px; border-radius: 5px; border-color: #bcbebf" value="#{verDatos.idEspacio}">
+                                                <f:selectItems value="#{espacioController.espacios}" var="Espac" itemLabel="#{Espac.espacio}" itemValue="#{Espac.idEspacio}"/>
+                                                <h:message for="idEspacio" class="text-danger"/>
+                                            </h:selectOneMenu>
+                                        </h:column>
+                                    </h:panelGrid>
+                                </div>
+                                <br></br>
+
+                                <div class="ui-fluid col-9">
+                                    <h:outputLabel class="mb-2" style="font-weight: 600" value="Tipo de Muestra" />
+                                    <p:inputTextarea id="muestra" value="#{verDatos.muestra}" required="true" requiredMessage="Tipo de muestra obligatoria" />
+                                    <h:message for="muestra" class="text-danger"/>
+                                </div>
+                                <br></br>
+                                
+                                <div class="ui-fluid">
+                                    <h:panelGrid columns="2">
+                                        <h:column>
+                                            <div>
+                                                <p:commandButton id="guardar" value="Guardar Orden Servicio" ajax="false" styleClass="ui-button-success"  action="#{verDatos.guardarInformacion()}"/>
+                                            </div>
+                                        </h:column>
+                                        <h:column>
+                                            <div  class="mx-3">
+                                                <p:commandButton value="Cancelar" styleClass="ui-button-danger"  onclick="location.href = '/SCFM/faces/ventas/OrdenServicio.xhtml';"/>
+                                            </div>
+                                        </h:column>
+                                    </h:panelGrid>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

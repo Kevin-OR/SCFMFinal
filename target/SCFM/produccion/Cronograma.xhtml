@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:body>
+        <ui:composition template="./../resources/templates/plantillaAdmin.xhtml">
+            <ui:define name="content">
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Elaborar Cronograma</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a href="/SCFM/faces/inicio.xhtml">Inicio</a></li>
+                            <li class="breadcrumb-item"><a href="/SCFM/faces/produccion/MenuCronograma.xhtml">Cronogramas</a></li>
+                            <li class="breadcrumb-item active">Elaborar Cronograma</li>
+                        </ol>
+
+                        <div class="card mb-4">
+                            <h:form>
+                            <div class="card-header">
+                                <div class="ui-fluid">
+                                    <h:panelGrid columns="2">
+                                        <h:column>
+                                            <h:outputLabel class="mb-2" style="font-weight: 600" for="OT_C" value="Orden de Trabajo" />
+                                        </h:column>
+                                        <h:column>
+                                            <div class="mx-4">
+                                                <p:inputText id="OT_C" value="OT-#{cronoController.idOt}" size="10" disabled="true" />
+                                            </div>
+                                        </h:column>
+                                    </h:panelGrid>
+                                </div>
+                            </div>
+</h:form>
+                            
+                            
+                            <div class="card-body">
+                                <h:form id="crono">
+                                    <div class="ui-fluid">
+                                        <h:panelGrid columns="3" >
+                                            <h:column>
+                                                <h:outputLabel class="mb-2" style="font-weight: 600" for="NomTa" value="Nombre de la Tarea"/>
+                                                <p:inputText id="NomTa" value="#{tareasCController.nomTarea}" placeholder="Escribir Nombre de la Tarea"/>
+                                            </h:column>
+                                            <h:column>
+                                                <div class="mx-4">
+                                                    <h:outputLabel class="mb-2" style="font-weight: 600" for="FeTa" value="Fecha de Finalización"/>
+                                                    <p:inputText type="date" id="FeTa" value="#{tareasCController.fechaFin}" placeholder="Escribir Fecha de Finalización"/>
+                                                </div>
+                                            </h:column>
+                                            <h:column>
+                                                <h:outputLabel class="mb-2" style="font-weight: 600" for="EmTa" value="Empleado Asignado"/>
+                                                <br/>
+                                                <h:selectOneMenu class="mb-1" style="font-weight: 600; width:310px; height:40px; border-radius: 5px; border-color: #bcbebf;" value="#{tareasCController.idPersonal}">
+                                                    <f:selectItem itemLabel="Seleccionar" itemValue="0"/>
+                                                    <f:selectItems value="#{IngresaPersonaController.tablaPersona}" var="EmTa" itemLabel="#{EmTa.nombrePerso}" itemValue="#{EmTa.idPersona}"/>
+                                                </h:selectOneMenu>
+                                            </h:column>
+                                        </h:panelGrid>
+                                    </div>
+                                
+                                <div class="ui-fluid col-2">
+                                    <br/> 
+                                    <p:commandButton value="Guardar Tarea" styleClass="ui-button-help" ajax="true" action="#{tareasCController.listarTarea(cronoController.idOt)}" />
+                                </div>
+                                <br/>
+</h:form>
+
+                                <h:form id="cronoTare">
+                                    <p:dataTable id="cronoyta" var="cronota" value="#{cronoController.tareasC}" paginator="true" paginatorPosition="bottom" rows="10" >
+                                        <p:column headerText="Nombre Tarea" style="width:10%">
+                                            <h:outputText value="#{cronota.nomTarea}"/>
+                                        </p:column>
+                                        <p:column headerText="Fecha Finalización" style="width:10%">
+                                            <h:outputText value="#{cronota.fechaFin}"/>
+                                        </p:column>
+                                        <p:column headerText="Empleado Asignado" style="width:10%">
+                                            <h:outputText value="#{cronota.nombreP}"/>
+                                        </p:column>
+                                        <p:column headerText="Opción" style="width:10%">
+                                            <p:commandButton value="Eliminar" styleClass="ui-button-danger" ajax="true" action="#{tareasCController.elimina(cronota.idTareaC)}"/>
+                                        </p:column>
+                                    </p:dataTable>
+                                    <br/>
+                                
+
+                                <div class="ui-fluid col-2">
+                                    <p:commandButton value="Guardar Cronograma" styleClass="ui-button-success" ajax="true" action="#{cronoController.guardarInformacion()}"/>
+                                </div>
+</h:form>
+                            </div>
+                            <div class="card-footer">
+                                <span style="float: right">
+                                    <p:commandButton value="Regresar a Cronogramas" id="devolver" styleClass="ui-button-secondary" ajax="true" onclick="location.href = '/SCFM/faces/produccion/MenuCronograma.xhtml';"/>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
+

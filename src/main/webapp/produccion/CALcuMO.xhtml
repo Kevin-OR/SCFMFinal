@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <h:body onload="#{MOsalaController.vacisala()}">
+        <ui:composition template="./../resources/templates/plantillaAdmin.xhtml">
+            <ui:define name="content">
+                <h:form>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Cálculo Mano de Obra</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item">
+                                <a href="/SCFM/faces/inicio.xhtml">Inicio</a>
+                            </li>
+                            <li class="breadcrumb-item"><a href="/SCFM/faces/produccion/ManodeObra.xhtml">Mano de Obra</a></li>
+                            <li class="breadcrumb-item active">Calcular Salario</li>
+                            <li class="breadcrumb-item active">Calcular</li>
+                        </ol>
+
+                        <div class="card mb-4">
+                            <div class="card-body">
+
+                                <div class="ui-fluid">
+                                    <h:panelGrid columns="3" >
+                                        <h:column>
+                                            <h:outputLabel class="mb-2" style="font-weight: 600; width:310px" for="norm" value="Horas Normales"/>
+                                            <br/>
+                                            <p:inputText id="norm" type="number" value="#{MOController.horasNor}" required="true" requiredMessage="Campo Obligatorio" disabled="true"/>
+                                            <h:message for="norm" class="text-danger"/>
+                                        </h:column>
+                                        <h:column>
+                                            <div class="mx-4">
+                                                <h:outputLabel class="mb-2" style="font-weight: 600; width:310px" for="Extras" value="Horas Extraordinarias"/>
+                                                <br/>
+                                                <p:inputText id="Extras" type="number" value="#{MOController.horasExtra}" required="true" requiredMessage="Campo Obligatorio" disabled="true"/>
+                                                <h:message for="Extras" class="text-danger"/>
+                                            </div>
+                                        </h:column>
+                                        <h:column>
+                                            <h:outputLabel class="mb-2" style="font-weight: 600; width:310px" for="DoExtras" value="Horas doble Extraordinarias"/>
+                                            <br/>
+                                            <p:inputText id="DoExtras" type="number" value="#{MOController.horasDobExtra}" required="true" requiredMessage="Campo Obligatorio" disabled="true"/>
+                                            <h:message for="DoExtras" class="text-danger"/>
+                                        </h:column>
+                                    </h:panelGrid> 
+                                </div>
+                                <br></br>
+                                <h:panelGrid columns="2" >
+
+                                    <h:column>
+                                        <h:outputLabel class="mb-2" style="font-weight: 600; width:310px" for="total" value="Total"/>
+                                        <br/>
+                                        <p:inputText id="total" type="number" value="#{MOsalaController.total}" required="true" requiredMessage="Campo Obligatorio" disabled="true"/>
+                                    </h:column>
+                                    <h:column>
+                                        <div class="mx-4">
+                                            <h:outputLabel class="mb-2" style="font-weight: 600; width:310px" for="h" value="Salario por hora"/>
+                                            <br/>
+                                            <p:inputText id="h" type="number" value="#{MOsalaController.sala}" required="true" requiredMessage="Campo Obligatorio" disabled="true"/>
+                                            <h:message for="h" class="text-danger"/>
+                                        </div>
+                                    </h:column>
+
+
+                                </h:panelGrid>
+
+                                <br></br>
+
+                                <div class="ui-fluid col-2">
+                                    <h:column>
+                                        <p:commandButton value="Calcular" ajax="true" action="#{MOsalaController.operacion(MOController.idPersonal)}"/>
+                                    </h:column>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <span style="float: right">
+                                    <p:commandButton value="Regresar" id="devolver" styleClass="ui-button-secondary" action="#{MOController.vacia()}" ajax="true" onclick="location.href = '/SCFM/faces/produccion/CalcularSalario.xhtml';"/>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

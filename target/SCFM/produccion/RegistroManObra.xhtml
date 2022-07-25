@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:body>
+        <ui:composition template="./../resources/templates/plantillaAdmin.xhtml">
+            <ui:define name="content">
+
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Registro Mano de Obra</h1>
+
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item">
+                            <a href="/SCFM/faces/inicio.xhtml">Inicio</a>
+                        </li>
+                        <li class="breadcrumb-item"><a href="/SCFM/faces/produccion/ManodeObra.xhtml">Mano de Obra</a></li>
+                        <li class="breadcrumb-item active">Registro Mano de Obra</li>
+                    </ol>
+
+
+                    <p:growl  showDetail="true"/>
+
+
+                    <div class="card mb-4">
+                        
+
+                        <div class="card-body">
+
+                            
+
+                            <div class="card mb-4 ui-fluid"/>
+
+                            <h:form id="MateLisForm">
+                                <div class="ui-fluid">
+                                    <h:panelGrid columns="3">
+                                        <h:column>
+                                            <h:outputLabel class="mb-2" style="font-weight: 600" for="per" value="Empleado"/>
+                                            <br/>
+                                            <h:selectOneMenu class="mb-1" style="font-weight: 600; width:310px; height:40px; border-radius: 5px; border-color: #bcbebf;" value="#{MOController.idPersonal}">
+                                                <f:selectItem itemLabel="Seleccionar" itemValue="0"/>
+                                                <f:selectItems value="#{IngresaPersonaController.tablaPersona}" var="MOPer" itemLabel="#{MOPer.nombrePerso} #{MOPer.priApellidoPerso}" itemValue="#{MOPer.idPersona}"/>
+                                            </h:selectOneMenu>
+                                        </h:column>
+                                        <h:column>
+                                            <div class="mx-4">
+                                                <h:outputLabel class="mb-2" style="font-weight: 600; width:310px" for="nor" value="Horas Normales"/>
+                                                <br/>
+                                                <p:inputText type="number" value="#{MOController.horasNor}" required="true" requiredMessage="Campo Obligatorio" />
+                                            </div>
+                                        </h:column>
+                                        <h:column>
+                                            <div class="mx-4">
+                                                <h:outputLabel class="mb-2" style="font-weight: 600; width:310px" for="Extra" value="Horas Extraordinarias"/>
+                                                <br/>
+                                                <p:inputText type="number" value="#{MOController.horasExtra}" required="true" requiredMessage="Campo Obligatorio" />
+                                            </div>
+                                        </h:column>
+                                        <h:column>
+                                            <div class="mx-4">
+                                                <h:outputLabel class="mb-2" style="font-weight: 600; width:310px" for="DoExtra" value="Horas doble Extraordinarias"/>
+                                                <br/>
+                                                <p:inputText type="number" value="#{MOController.horasDobExtra}" required="true" requiredMessage="Campo Obligatorio" />
+                                            </div>
+                                        </h:column>
+                                        <h:column>
+                                            <br/>
+                                            <p:commandButton value="Agregar" ajax="true" styleClass="ui-button-info" action="#{MOController.nuevoMO()}"/>
+                                        </h:column>
+                                    </h:panelGrid>
+                                </div>
+                            </h:form>
+                            <br></br>
+
+                            <h:form id="formList">
+                                <p:dataTable id="dt-products" var="MOT" value="#{MOController.MOTa}" paginator="true" paginatorPosition="bottom" rows="10" >
+                                    <p:column headerText="Empleado" style="width:10%">
+                                        <h:outputText value="#{MOT.idPersonal}"/>
+                                    </p:column>
+                                    <p:column headerText="Nombre empleado" style="width:10%">
+                                        <h:outputText value="#{MOT.nombrePerso} #{MOT.priApellidoPerso} #{MOT.segApellidoPerso}"/>
+                                    </p:column>
+                                    <p:column headerText="Horas Normales" style="width:10%">
+                                        <h:outputText value="#{MOT.horasNor}"/>
+                                    </p:column>
+                                    <p:column headerText="Horas Extraordinarias" style="width:10%">
+                                        <h:outputText value="#{MOT.horasExtra}"/>
+                                    </p:column>
+                                    <p:column headerText="Horas Doble Extraordinarias" style="width:10%">
+                                        <h:outputText value="#{MOT.horasDobExtra}"/>
+                                    </p:column>
+                                    <p:column headerText="Opción" style="width:10%">
+                                        <p:commandButton value="Eliminar" styleClass="ui-button-danger" ajax="true" action="#{MOController.elimina(MOT.idMO)}" onclick="location.reload()"/>
+                                    </p:column>
+                                    <p:column headerText="Opción" style="width:10%">
+                                        <p:commandButton value="Actualizar" styleClass="ui-button-info" ajax="true" action="#{MOController.edita(MOT.idMO)}"/>
+                                    </p:column>
+                                </p:dataTable>
+                                <br/>
+                            </h:form>
+
+                           
+                        </div>
+                        <div class="card-footer">
+                            <span style="float: right">
+                                <p:commandButton value="Regresar" id="devolver" styleClass="ui-button-secondary" ajax="true" onclick="location.href = '/SCFM/faces/produccion/ManodeObra.xhtml';"/>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

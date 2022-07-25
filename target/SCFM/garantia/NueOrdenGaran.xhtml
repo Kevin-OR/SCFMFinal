@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:body>
+        <ui:composition template="./../resources/templates/plantillaAdmin.xhtml">
+            <ui:define name="content">
+                <h:form>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Nueva Orden de Garantía</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a href="/SCFM/faces/inicio.xhtml">Inicio</a></li>
+                            <li class="breadcrumb-item"><a href="/SCFM/faces/garantia/OrdenGarantia.xhtml">Orden de Garantía</a></li>
+                            <li class="breadcrumb-item active">Nueva Orden de Garantía</li>
+                        </ol>
+
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <div class="ui-fluid">
+                                    <h:panelGrid columns="2">
+                                        <h:column>
+                                            <h:outputLabel class="mb-1" style="font-weight: 600" for="OS" value="Orden de trabajo"/>
+                                        </h:column>
+                                        <h:column>
+                                            <div class="mx-2">
+                                                <h:selectOneMenu class="mb-1" style="font-weight: 600; width:150px; height:40px; border-radius: 5px; border-color: #bcbebf"  value="#{OGController.idOt}">
+                                                    <f:selectItem itemLabel="Seleccionar" itemValue="0"/>
+                                                    <f:selectItems value="#{OTController.tabOT}" var="OT" itemLabel="OT-#{OT.idOt}" itemValue="#{OT.idOt}"/>
+                                                </h:selectOneMenu>
+                                            </div>
+                                        </h:column>
+                                    </h:panelGrid>
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="ui-fluid">
+                                    <h:panelGrid columns="2" > 
+                                        <h:column>
+                                            <h:outputLabel class="mb-2" style="font-weight: 600" for="visitaUno" value="Visitante 1"/>
+                                            <br></br>
+                                            <h:selectOneMenu class="mb-1" style="font-weight: 600; width:200px; height:40px; border-radius: 5px; border-color: #bcbebf" value="#{OGController.visitaUno}">
+                                                <f:selectItem itemLabel="Seleccionar" itemValue="0"/>
+                                                <f:selectItems value="#{IngresaPersonaController.tablaPersona}" var="ROR" itemLabel="#{ROR.nombrePerso}" itemValue="#{ROR.idPersona}"/>
+                                            </h:selectOneMenu>
+                                        </h:column>
+                                        <h:column>
+                                            <div class="mx-4">
+                                                <h:outputLabel class="mb-2" style="font-weight: 600" for="visitaDos" value="Visitante 2" />
+                                                <br></br>
+                                                <h:selectOneMenu class="mb-1" style="font-weight: 600; width:200px; height:40px; border-radius: 5px; border-color: #bcbebf" value="#{OGController.visitaDos}">
+                                                    <f:selectItem itemLabel="Seleccionar" itemValue="0"/>
+                                                    <f:selectItems value="#{IngresaPersonaController.tablaPersona}" var="ROR" itemLabel="#{ROR.nombrePerso}" itemValue="#{ROR.idPersona}"/>
+                                                </h:selectOneMenu>
+                                            </div>
+                                        </h:column>
+                                    </h:panelGrid>
+                                </div>
+                                <br></br>
+
+                                <div class="ui-fluid col-9">
+                                    <h:outputLabel class="mb-2" style="font-weight: 600" value="Dirección de Visita" />
+                                    <p:inputText id="direccion" value="#{OGController.direccion}" required="true" requiredMessage="Campo Obligatorio" />
+                                    <h:message for="direccion" class="text-danger"/>
+                                </div> 
+                                <br></br>
+
+                                <div class="ui-fluid">
+                                    <h:panelGrid columns="2">
+                                        <h:column>
+                                            <h:outputLabel class="mb-2" style="font-weight: 600" value="Fecha de Visita" />
+                                            <p:inputText type="date" id="fechaVisi" value="#{OGController.fechaVisi}" required="true" requiredMessage="Campo Obligatorio" />
+                                            <h:message for="fechaVisi" class="text-danger"/>
+                                        </h:column>
+                                        <h:column>
+                                            <div class="mx-4">
+                                                <h:outputLabel class="mb-2" style="font-weight: 600" for="horaVisi" value="Hora de Visita" />
+                                                <p:inputText type="time" id="horaVisi" value="#{OGController.horaVisi}" required="true" requiredMessage="Campo Obligatorio"/>
+                                                <h:message for="horaVisi" class="text-danger"/>
+                                            </div>
+                                        </h:column>
+                                    </h:panelGrid>
+                                </div>
+                                <br></br>
+
+                                <div class="ui-fluid col-2">
+                                    <div>
+                                        <p:commandButton id="guardar" value="Guardar Orden Garantía" ajax="true" styleClass="ui-button-success" action="#{OGController.guardarInformacion()}"/>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card-footer">
+                                <span style="float: right">
+                                    <p:commandButton value="Regresar a Orden Garantía" id="devolver" styleClass="ui-button-secondary" ajax="true" onclick="location.href = '/SCFM/faces/garantia/OrdenGarantia.xhtml';"/>
+                                </span>
+                            </div>       
+                        </div>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

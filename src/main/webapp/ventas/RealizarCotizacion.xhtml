@@ -1,0 +1,184 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+
+
+
+    <h:body>
+        <ui:composition template="./../resources/templates/plantillaAdmin.xhtml">
+            <ui:define name="content">
+
+
+
+
+
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Realizar Cotización</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item">
+                            <a href="/SCFM/faces/inicio.xhtml">Inicio</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="/SCFM/faces/ventas/Cotizacion.xhtml">Cotización</a>
+                        </li>
+                        <li class="breadcrumb-item active">Realizar Cotización</li>
+                    </ol>
+
+
+
+
+
+                    <div class="card mb-4">
+                        <h:form>
+                            <div class="card-header">
+                                <div class="ui-fluid">
+                                    <h:panelGrid columns="2">
+                                        <h:column>
+                                            <h:outputLabel class="mb-2" style="font-weight: 600" for="SS_Co" value="Solicitud de Servicio" />
+                                        </h:column>
+                                        <h:column>
+                                            <div class="mx-4">
+                                                <p:inputText id="SS_Co" value="SS-#{cotiController.idSoliServ}" size="10" disabled="true" />
+                                            </div>
+                                        </h:column>
+                                    </h:panelGrid>
+                                </div>
+                            </div>
+                        </h:form>
+
+
+
+
+                        <div class="card-body">
+
+
+
+
+
+                            <h:form id="CotiList">
+                                <div class="ui-fluid">
+                                    <h:panelGrid columns="3" >
+                                        <h:column>
+                                            <h:outputLabel class="mb-2" style="font-weight: 600" for="MateNue" value="Material Nuevo"/>
+                                            <p:inputText id="MateNue" value="#{MaterialController.nomMaterial}" placeholder="Escribir Nombre del Material"/>
+                                        </h:column>
+                                        <h:column>
+                                            <div class="mx-4">
+                                                <h:outputLabel class="mb-2" style="font-weight: 600" for="PrecioNue" value="Precio Material"/>
+                                                <p:inputText type="number" id="PrecioNue" value="#{MaterialController.precioMaterial}" placeholder="Escribir Precio del Material"/>
+                                            </div>
+                                        </h:column>
+                                        <h:column>
+                                            <br/>
+                                            <p:commandButton styleClass="ui-button-success" ajax="true" action="#{MaterialController.nuevoMater()}" onclick="location.reload()" value="Registrar Material" />
+                                        </h:column>
+                                    </h:panelGrid>
+                                </div>
+                            </h:form>
+
+
+
+
+
+                            <div class="card mb-4 ui-fluid"/>
+
+
+
+
+
+                            <h:form id="MateLisForm">
+                                <div class="ui-fluid">
+                                    <h:panelGrid columns="3">
+                                        <h:column>
+                                            <h:outputLabel class="mb-2" style="font-weight: 600" for="MateriCoti" value="Material"/>
+                                            <br/>
+                                            <h:selectOneMenu class="mb-1" style="font-weight: 600; width:310px; height:40px; border-radius: 5px; border-color: #bcbebf;" value="#{mateListController.idMaterial}">
+                                                <f:selectItem itemLabel="Seleccionar" itemValue="0"/>
+                                                <f:selectItems value="#{MaterialController.materiales}" var="MaterCoti" itemLabel="#{MaterCoti.nomMaterial}" itemValue="#{MaterCoti.idMaterial}"/>
+                                            </h:selectOneMenu>
+                                        </h:column>
+                                        <h:column>
+                                            <div class="mx-4">
+                                                <h:outputLabel class="mb-2" style="font-weight: 600; width:310px" for="CantiMat" value="Cantidad a Ocupar"/>
+                                                <br/>
+                                                <p:inputText type="number" value="#{mateListController.cantOcupar}" required="true" requiredMessage="Campo Obligatorio" />
+                                            </div>
+                                        </h:column>
+                                        <h:column>
+                                            <br/>
+                                            <p:commandButton value="Listar Material" ajax="true" styleClass="ui-button-info" action="#{mateListController.listarMate(cotiController.idSoliServ)}" />
+                                        </h:column>
+                                    </h:panelGrid>
+                                </div>
+                            </h:form>
+                            <br></br>
+
+
+
+
+
+                            <h:form id="formList">
+                                <p:dataTable id="dt-products" var="MaterList" value="#{cotiController.materList}" paginator="true" paginatorPosition="bottom" rows="10" >
+                                    <p:column headerText="Material" style="width:10%">
+                                        <h:outputText value="#{MaterList.material}"/>
+                                    </p:column>
+                                    <p:column headerText="Cantidad" style="width:10%">
+                                        <h:outputText value="#{MaterList.cantOcupar}"/>
+                                    </p:column>
+                                    <p:column headerText="Opción" style="width:10%">
+                                        <p:commandButton value="Eliminar" styleClass="ui-button-danger" ajax="true" action="#{mateListController.elimina(MaterList.idMateList)}"/>
+                                    </p:column>
+                                </p:dataTable>
+                                <br/>
+                            </h:form>
+
+
+
+
+
+                            <h:form>
+                                <div class="ui-fluid">
+                                    <h:panelGrid columns="2">
+                                        <h:column>
+                                            <h:outputLabel class="mb-2" style="font-weight: 600" for="CostoInstal" value="Precio Instalación"/>
+                                            <br/>
+                                            <p:inputText type="number" value="#{cotiController.preInsta}" />
+                                        </h:column>
+                                        <h:column>
+                                            <div class="mx-4">
+                                                <h:outputLabel class="mb-2" style="font-weight: 600" for="CostoTransp" value="Precio Transporte"/>
+                                                <br/>
+                                                <p:inputText type="number" id="CostoTransp" value="#{cotiController.preTrans}"/>
+                                            </div>
+                                        </h:column>
+                                        <h:column>
+                                            <br/>
+                                            <p:commandButton value="Calcular Cotización" ajax="true" styleClass="ui-button-help" action="#{cotiController.guardarInformacion()}"/>
+                                        </h:column>
+                                    </h:panelGrid>
+                                    <br/>
+                                    <div class="ui-fluid col-2">
+                                        <h:outputLabel class="mb-2" style="font-weight: 600" for="TotalCoti" value="Total de la Cotización"/>
+                                        <br/>
+                                        <p:inputText type="number" id="TotalCoti" value="#{cotiController.total}" disabled="true"/>
+                                    </div>
+                                </div>
+                            </h:form>
+                        </div>
+                        <div class="card-footer">
+                            <span style="float: right">
+                                <p:commandButton value="Regresar a Cotización" id="devolver" styleClass="ui-button-secondary" ajax="true" onclick="location.href = '/SCFM/faces/ventas/Cotizacion.xhtml';"/>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

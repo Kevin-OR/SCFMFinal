@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../resources/templates/plantillaAdmin.xhtml">
+
+    <ui:define name="content">
+        <main>
+            <form action="" method="post">
+
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Actualizar inventario</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item">
+                            <a href="/SCFM/faces/inicio.xhtml">Inicio</a>
+                        </li>
+                        <li class="breadcrumb-item active">Actualizar inventario</li>
+                    </ol>
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-4">
+                                    <!-- Full Name -->
+                                    <label for="PriApellCliente" class="control-label">Cédula</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="PriApellCliente"
+                                        name="full_name"
+                                        placeholder="Ingresar Cédula"
+                                        required="required"/>
+                                </div>
+
+                                <div class="col-4">
+                                    <label for="NombreCliente" class="control-label">Nombre</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="NombreCliente"
+                                        name="full_name"
+                                        placeholder="Ingresar Nombre"
+                                        required="required"/>
+                                </div>
+
+                                <div class="col-4">
+                                    <!-- Full Name -->
+                                    <label for="PriApellCliente" class="control-label">Primer Apellido</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="PriApellCliente"
+                                        name="full_name"
+                                        placeholder="Ingresar Primer Apellido"
+                                        required="required"/>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <!-- Full Name -->
+                                    <label for="SegApellCliente" class="control-label">Segundo Apellido</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="SegApellCliente"
+                                        name="full_name"
+                                        placeholder="Ingresar Segundo Apellido"
+                                        required="required"/>
+
+                                </div>
+
+                                <div class="col-4">
+                                    <!-- Full Name -->
+                                    <label for="SegApellCliente" class="control-label">Salario por hora</label>
+                                    <input
+                                        type="number"
+                                        class="form-control"
+                                        id="SegApellCliente"
+                                        name="full_name"
+                                        placeholder="Ingresar cuanto gana por hora"
+                                        required="requiered"/>
+
+                                </div>
+                                
+         
+                            </div>
+                            <br/>
+                            <div>
+                                <input
+                                    type="submit"
+                                    value="Agregar"
+                                    onclick="location.href = '/SCFM/faces/inventario/InvenPersonal.xhtml';"
+                                    class="btn btn-success btn-sm"/>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </main>
+    </ui:define>
+
+</ui:composition>

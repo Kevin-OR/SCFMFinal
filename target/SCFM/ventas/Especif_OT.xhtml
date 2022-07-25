@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <ui:composition template="./../resources/templates/plantillaAdmin.xhtml">
+            <ui:define name="content">
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Especificaciones de O.T</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item"><a href="/SCFM/faces/inicio.xhtml">Inicio</a></li>
+                        <li class="breadcrumb-item"><a href="/SCFM/faces/ventas/OrdenTrabajo.xhtml">Orden de Trabajo</a></li>
+                        <li class="breadcrumb-item"><a href="/SCFM/faces/ventas/Visualizar_OTVenta.xhtml">Visualizar Orden de Trabajo</a></li>
+                        <li class="breadcrumb-item active">Especificaciones de O.T</li>
+                    </ol>
+                    <div class="card mb-4">
+
+
+                        <div class="card-header">
+                            <h:panelGrid columns="2">
+                                <h:column>
+                                    <h:outputLabel class="mb-2" style="font-weight: 600" for="ot" value="Orden de Trabajo" /> 
+                                </h:column>
+                                <h:column>
+                                    <div class="mx-4">
+                                        <p:inputText id="ot" value="OT-#{especificacionOTController.idOt}" size="10" disabled="true" />
+                                    </div>
+                                </h:column>
+                            </h:panelGrid>
+                        </div>
+
+                        <div class="card-body">
+                            <h:form id="espeFo">
+                                <div class="ui-fluid ">
+                                    <h:panelGrid columns="2">
+                                        <h:column>
+                                            <h:outputLabel class="mb-2" style="font-weight: 600" for="NEspe" value="Nombre de Especificación"/>
+                                            <p:inputText id="NEspe" value="#{especificacionOTController.nomEspe}" required="true" requiredMessage="Campo Obligatorio"/>
+                                            <h:message for="NEspe" class="text-danger"/>
+                                        </h:column>
+                                        <h:column>
+                                            <div class="mx-4">
+                                                <h:outputLabel class="mb-2" style="font-weight: 600" for="TEspe" value="Tipo de Especificación"/>
+                                                <p:inputText id="TEspe" value="#{especificacionOTController.tipoEspe}" required="true" requiredMessage="Campo Obligatorio"/>
+                                                <h:message for="TEspe" class="text-danger"/>
+                                            </div>
+                                        </h:column>
+                                        <h:column>
+                                            <br/>
+                                            <h:outputLabel class="mb-2" style="font-weight: 600" for="DeEspe" value="Descripción de Especificación"/>
+                                            <p:inputText id="DeEspe" value="#{especificacionOTController.descrEspe}" required="true" requiredMessage="Campo Obligatorio"/>
+                                            <h:message for="DeEspe" class="text-danger"/>
+                                        </h:column>
+                                        <h:column>
+                                            <br/>
+                                            <div class="mx-4">
+                                                <h:outputLabel class="mb-2" style="font-weight: 600" for="NoEspe" value="Notas de Especificación"/>
+                                                <p:inputText id="NoEspe" value="#{especificacionOTController.notasEspe}"/>
+                                            </div>
+                                        </h:column>
+
+                                    </h:panelGrid>
+                                </div>
+                                <br/>
+                                <h:column>
+                                    <p:commandButton id="registrar" form="espeFo" value="Registrar Especificación" ajax="true" styleClass="ui-button-help" action="#{especificacionOTController.guardarInformacion()}" />
+                                </h:column>
+                                <br/>
+                            </h:form>
+
+                            <h:form id="eliespe">
+                                <p:growl id="esmsj" showDetail="true"/>
+                                <div class="card-body">     
+                                    <p:dataTable var="especificacionOT" value="#{especificacionOTController.especis}" paginator="true" paginatorPosition="bottom" rows="10">
+                                        <p:column headerText="Nombre" style="width:10%">
+                                            <h:outputText value="#{especificacionOT.nomEspe}"/>
+                                        </p:column>
+                                        <p:column headerText="Tipo" style="width:10%">
+                                            <h:outputText value="#{especificacionOT.tipoEspe}"/>
+                                        </p:column>
+                                        <p:column headerText="Descripción" style="width:10%">
+                                            <h:outputText value="#{especificacionOT.descrEspe}"/>
+                                        </p:column>
+                                        <p:column headerText="Notas" style="width:10%">
+                                            <h:outputText value="#{especificacionOT.notasEspe}"/>
+                                        </p:column>
+                                        <p:column headerText="Opción" style="width:10%" >
+                                            <p:commandButton id="eliminar" form="eliespe" value="Eliminar" ajax="true" styleClass="ui-button-danger" action="#{especificacionOTController.elimina(especificacionOT.idEspe)}"/>
+                                        </p:column>
+                                    </p:dataTable>
+                                </div>    
+                                <br/>
+
+                                <div class="ui-fluid">
+                                    <h:panelGrid columns="2">
+                                        <h:column>
+                                            <p:commandButton value="Verificar Especificaciones" styleClass="ui-button-info" ajax="false"  action="#{especificacionOTController.modificarAceptarES()}" />
+                                        </h:column>
+                                        <h:column>
+                                            <div  class="mx-3">
+                                                <p:commandButton value="Enviar Especificaciones" styleClass="ui-button-success" ajax="false" action="#{especificacionOTController.enviadoES()}" />
+                                            </div>
+                                        </h:column>
+                                    </h:panelGrid>
+                                </div>
+                            </h:form> 
+                        </div>
+                        <div class="card-footer">
+                            <span style="float: right">
+                                <p:commandButton value="Regresar a Orden Trabajo" id="devolver" styleClass="ui-button-secondary" ajax="true" onclick="location.href = '/SCFM/faces/ventas/Visualizar_OTVenta.xhtml';"/>
+                            </span>
+                        </div>
+                    </div>
+                </div> 
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

@@ -1,0 +1,150 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:body>
+        <ui:composition template="./../resources/templates/plantillaAdmin.xhtml">
+            <ui:define name="content">
+                <h:form>
+                    <p:growl id="gro" showDetail="true" />
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Agregar Nuevo Empleado</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a href="/SCFM/faces/inicio.xhtml">Inicio</a></li>
+                            <li class="breadcrumb-item"><a href="/SCFM/faces/inventario/InvenPersonal.xhtml">Inventario de Personal</a></li>
+                            <li class="breadcrumb-item active">Agregar Nuevo Empleado</li>
+                        </ol>
+
+                        <div class="card mb-4">
+                            <div class="card-body">
+
+                                <div class="ui-fluid">
+                                    <h:panelGrid columns="2" >
+                                        <h:column>
+                                            <h:outputLabel class="mb-2" style="font-weight: 600" for="tipocedu" value="Tipo de cedula"/>
+                                            <br/>
+                                            <h:selectOneMenu class="mb-1" style="font-weight: 600; width:200px; height:40px;"  id="tipocedu" value="#{IngresaPersonaController.idTipocedula}">
+                                                <f:selectItem itemLabel="Seleccionar Tipo" itemValue="0"/>
+                                                <f:selectItems value="#{rolTipoCedController.tipoCedu}" var="Cedu" itemLabel="#{Cedu.tipoCedula}" itemValue="#{Cedu.idTipoCedula}"/>
+                                            </h:selectOneMenu>
+                                        </h:column>
+                                        <h:column>
+                                            <div class="mx-4">
+                                                <h:outputLabel class="mb-2" style="font-weight: 600" for="cedu" value="Cédula"/>
+                                                <p:inputNumber id="cedu" type="" value="#{IngresaPersonaController.idPersona}" placeholder="Ingresar Cédula" required="true" requiredMessage="Campo Obligatorio"/>
+                                                <h:message for="cedu" class="text-danger"/>
+                                            </div>
+                                        </h:column>
+                                    </h:panelGrid> 
+                                </div>
+                                <br></br>
+
+                                <div class="ui-fluid">
+                                    <h:panelGrid columns="3" >
+                                        <h:column>
+                                            <h:outputLabel class="mb-2" style="font-weight: 600" for="nom" value="Nombre Empleado"/>
+                                            <p:inputText id="nom" value="#{IngresaPersonaController.nombrePerso}" placeholder="Ingresar Nombre" required="true" requiredMessage="Campo Obligatorio"/>
+                                            <h:message for="nom" class="text-danger"/>
+                                        </h:column>
+                                        <h:column>
+                                            <div class="mx-4">
+                                                <h:outputLabel class="mb-2" style="font-weight: 600" for="PriApell" value="Primer Apellido"/>
+                                                <p:inputText id="PriApell" value="#{IngresaPersonaController.priApellidoPerso}" placeholder="Ingresar Primer Apellido" required="true" requiredMessage="Campo Obligatorio"/>
+                                                <h:message for="PriApell" class="text-danger"/>
+                                            </div>
+                                        </h:column>
+                                        <h:column>
+                                            <h:outputLabel class="mb-2" style="font-weight: 600" for="SegApell" value="Segundo Apellido"/>
+                                            <p:inputText id="SegApell" value="#{IngresaPersonaController.segApellidoPerso}" placeholder="Ingresar Segundo Apellido" required="true" requiredMessage="Campo Obligatorio"/>
+                                            <h:message for="SegApell" class="text-danger"/>
+                                        </h:column>
+                                    </h:panelGrid>
+                                </div>
+                                <br></br>
+
+                                <div class="ui-fluid">
+                                    <h:panelGrid columns="2" >
+                                        <h:column>
+                                            <h:outputLabel class="mb-2" style="font-weight: 600" for="telefo" value="Número de Teléfono"/>
+                                            <p:inputNumber id="telefo" value="#{IngresaPersonaController.telefono}" placeholder="Ingresar Número de Teléfono" required="true" requiredMessage="Campo Obligatorio"/>
+                                            <h:message for="telefo" class="text-danger"/>
+                                        </h:column>
+                                        <h:column>
+                                            <div class="mx-4">
+                                                <h:outputLabel class="mb-2" style="font-weight: 600" for="Correo" value="Correo Electrónico"/>
+                                                <p:inputText id="Correo" value="#{IngresaPersonaController.correoPerso}" placeholder="Ingresar Correo Electrónico" required="true" requiredMessage="Campo Obligatorio"
+                                                             validatorMessage="Formato del Correo Invalido"
+                                                             >
+                                                
+                                                <f:validateRegex
+		pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />    
+                                                
+                                                </p:inputText>
+                                                          
+                                                            
+                                                <h:message for="Correo" class="text-danger"/>
+                                            </div>
+                                        </h:column>
+                                    </h:panelGrid>
+                                </div>
+                                <br></br>
+
+                                <div class="ui-fluid">
+                                    <h:panelGrid columns="2" >
+                                        <h:column>
+                                            <h:outputLabel class="mb-2" style="font-weight: 600" for="Rol" value="Puesto de Empleado"/>
+                                            <br/>
+                                            <h:selectOneMenu id="Rol" class="mb-1" style="font-weight: 600; width:200px; height:40px;" value="#{IngresaPersonaController.idRol}">
+                                                <f:selectItem itemLabel="Seleccionar Rol" itemValue="0"/>
+                                                <f:selectItems value="#{rolTipoCedController.roles}" var="c" itemLabel="#{c.rol}" itemValue="#{c.idRol}"/>
+                                            </h:selectOneMenu>
+                                        </h:column>
+                                        <h:column>
+                                            <div class="mx-4">
+                                                <h:outputLabel class="mb-2" style="font-weight: 600" for="Salari" value="Ganancia por Hora"/>
+                                                <p:inputNumber id="Salari" value="#{IngresaPersonaController.salario}" placeholder="Ingresar Ganancia por Hora" required="true" requiredMessage="Campo Obligatorio"/>
+                                                <h:message for="Salari" class="text-danger"/>
+                                            </div>
+                                        </h:column>
+                                    </h:panelGrid>
+                                </div>
+                                <br></br>
+
+                                <div class="ui-fluid">
+                                    <h:panelGrid columns="2" >
+                                        <h:column>
+                                            <h:outputLabel class="mb-2" style="font-weight: 600" for="NomUsuar" value="Nombre de Usuario"/>
+                                            <p:inputText id="NomUsuar" value="#{IngresaPersonaController.nomUsuario}" placeholder="Ingresar Nombre de Usuario" required="true" requiredMessage="Campo Obligatorio"/>
+                                            <h:message for="NomUsuar" class="text-danger"/>
+                                        </h:column>
+                                        
+                                    </h:panelGrid>
+                                </div>
+                                <br></br>
+
+                                <div class="ui-fluid">
+                                    <h:panelGrid columns="2">
+                                        <h:column>
+                                            <div>
+                                                <p:commandButton value="Registrar" ajax="false" action="#{IngresaPersonaController.guardarInformacion(IngresaPersonaController.correoPerso, IngresaPersonaController.clave)}"/>
+                                            </div>
+                                        </h:column>
+                                        <h:column>
+                                            <div  class="mx-3">
+                                                <p:commandButton value="Regresar" styleClass="ui-button-danger"  onclick="location.href = '/SCFM/faces/inventario/InvenPersonal.xhtml';"/>
+                                            </div>
+                                        </h:column>
+                                    </h:panelGrid>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

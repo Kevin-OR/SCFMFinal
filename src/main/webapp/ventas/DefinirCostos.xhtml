@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:body>
+        <ui:composition template="./../resources/templates/plantillaAdmin.xhtml">
+            <ui:define name="content">
+                <h:form>
+                    <p:growl id="pvmsj" showDetail="true"/>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Definir Costos</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a href="/SCFM/faces/inicio.xhtml">Inicio</a></li>
+                            <li class="breadcrumb-item"><a href="/SCFM/faces/ventas/PrecioVenta.xhtml">Precio Venta</a></li>
+                            <li class="breadcrumb-item active">Definir Costos</li>
+                        </ol>
+
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h:panelGrid columns="2">
+                                    <h:column>
+                                        <h:outputLabel class="mb-2" style="font-weight: 600" for="soli" value="Solicitud" /> 
+                                    </h:column>
+                                    <h:column>
+                                        <div class="mx-2">
+                                            <p:inputText id="soli" value="SS-#{precioVentaController.idSoliServ}" size="10" disabled="true" />
+                                        </div>
+                                    </h:column>
+                                </h:panelGrid>
+                            </div>
+
+                            <div class="card-body">
+
+                                <div class="ui-fluid ">
+                                    <h:panelGrid columns="3">
+                                        <h:column>
+                                            <h:outputLabel class="mb-2" style="font-weight: 600" for="CTMate" value="Total de Material"/>
+                                            <p:inputText type="number" id="CTMate" value="#{precioVentaController.totalMate}"  required="true" validatorMessage="Campo Obligatorio"  placeholder="Escribir Total de Material" >
+                                                <f:validateLongRange minimum="1" ></f:validateLongRange>
+                                            </p:inputText>
+                                            <h:message for="CTMate" class="text-danger" />
+                                        </h:column>
+                                        <h:column>
+                                            <div class="mx-4">
+                                                <h:outputLabel class="mb-2" style="font-weight: 600" for="EMObra" value="Estimación de Mano de Obra"/>
+                                                <p:inputText type="number" id="EMObra" value="#{precioVentaController.manoObra}" required="true" validatorMessage="Campo Obligatorio" placeholder="Escribir Estimación de Mano de Obra">
+                                                    <f:validateLongRange minimum="1" ></f:validateLongRange>
+                                                </p:inputText>
+                                                <h:message for="EMObra" class="text-danger"/>
+                                            </div>
+                                        </h:column>
+                                        <h:column>
+                                            <h:outputLabel class="mb-2" style="font-weight: 600" for="EPEntre" value="Estimación de Plazo de Entrega"/>
+                                            <p:inputText id="EPEntre" value="#{precioVentaController.plazoEntre}" required="true" requiredMessage="Campo Obligatorio" placeholder="Escribir Estimación de Plazo de Entrega">
+                                            </p:inputText>
+                                            <h:message for="EPEntre" class="text-danger"/>
+                                        </h:column>
+                                        <h:column>
+                                            <br/>
+                                            <h:outputLabel class="mb-2" style="font-weight: 600" for="Adici" value="Adicionales"/>
+                                            <p:inputText type="number" id="Adici" value="#{precioVentaController.agregados}"  placeholder="Escribir Adicionales Opcional"/>
+
+                                            <h:message for="Adici" class="text-danger"/>
+                                        </h:column>
+                                        <h:column>
+                                            <br/>
+                                            <div class="mx-4">
+                                                <h:outputLabel class="mb-2" style="font-weight: 600;" for="Descu" value="Descuento"/><br/>
+                                                <p:inputText type="number" id="Descu" value="#{precioVentaController.descuento}" placeholder="Escribir Descuento Opcional"/>
+                                                <h:message for="Descu" class="text-danger"/>
+                                            </div>
+                                        </h:column>
+                                    </h:panelGrid>
+                                </div>
+                                <br></br>
+
+                                <div class="ui-fluid col-2">
+                                    <h:column>
+                                        <p:commandButton value="Calcular Precio Venta" id="cal" ajax="false" styleClass="ui-button-help" action="#{precioVentaController.guardarInformacion()}"/>
+                                    </h:column>
+                                </div>
+                                <br/>
+                                <div class="ui-fluid col-2" >
+                                    <h:outputLabel class="mb-2" style="font-weight: 600" for="TPreci" value="Precio de Venta Calculado"/>
+                                    <p:inputText id="TPreci" type="number" value="#{precioVentaController.resultado}" disabled="true"/>
+                                </div>
+                                <br></br>
+
+                                <div class="ui-fluid">
+                                    <h:panelGrid columns="2">
+                                        <h:column>
+                                            <div>
+                                                <p:commandButton id="EnviPV" styleClass="ui-button-success"  value="Enviar Precio" ajax="false" action="#{precioVentaController.enviadoPV()}"/>
+                                            </div>
+                                        </h:column>
+                                        <h:column>
+                                            <div  class="mx-3">
+                                                <p:commandButton value="Borrar" styleClass="ui-button-danger" ajax="false" action="#{precioVentaController.elimina(precioVentaController.idSoliServ)}"/>
+                                            </div>
+                                        </h:column>
+                                    </h:panelGrid>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <span style="float: right">
+                                    <p:commandButton value="Regresar a Precios Venta" id="devolver" styleClass="ui-button-secondary" ajax="true" onclick="location.href = '/SCFM/faces/ventas/PrecioVenta.xhtml';"/>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

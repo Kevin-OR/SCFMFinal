@@ -1,0 +1,187 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:body>
+        <ui:composition template="./../resources/templates/plantillaAdmin.xhtml">
+            <ui:define name="content">
+                    <p:growl id="clasi" showDetail="true" />
+
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Clasificar S.S</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item">
+                                <a href="/SCFM/faces/inicio.xhtml">Inicio</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="/SCFM/faces/ventas/SolicitudesServicio.xhtml">Solicitud de Servicio</a>
+                            </li>
+                            <li class="breadcrumb-item active">Clasificar S.S</li>
+                        </ol>
+                        <div class="card mb-4" id="so">
+                        <h:form>
+                            <p:growl id="solis" showDetail="true"/>
+                            <div class="card-header">
+                                <h:panelGrid columns="2">
+                                    <h:column>
+                                <h:outputLabel class="mb-2" style="font-weight: 600" for="SoliS" value="Solicitud de Servicio"/>
+                                    </h:column>
+                                <h:column>
+                                <div class="mx-2">
+                                    <p:inputText id="SoliS" required="true" value="SS-#{soliServController.idSoliServ}" size="10" disabled="true"/>
+                                </div> 
+                                </h:column>
+                                </h:panelGrid>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="ui-fluid col-10">
+                                    <h:panelGrid columns="3">
+                                        <h:column>
+                                            <h:outputLabel class="mb-2" style="font-weight: 600" for="NombreCliente" value="Nombre del Cliente" />
+                                            <p:inputText id="NombreCliente" required="true" requiredMessage="Campo Obligatorio"  value="#{soliServController.nombClient}" disabled="true"/>
+                                        </h:column>
+                                        <h:column>
+                                            <div class="mx-4">
+                                                <h:outputLabel class="mb-2" style="font-weight: 600" for="PriApellCliente" value="Primer Apellido del Cliente" />
+                                                <p:inputText id="PriApellCliente" required="true" requiredMessage="Campo Obligatorio"  value="#{soliServController.priApeClient}" disabled="true"/>
+                                            </div>
+                                        </h:column>
+                                        <h:column>
+                                            <h:outputLabel class="mb-2" style="font-weight: 600" for="SegApellCliente" value="Segundo Apellido del Cliente" />
+                                            <p:inputText id="SegApellCliente" required="true" requiredMessage="Campo Obligatorio" value="#{soliServController.segApeClient}" disabled="true"/>
+                                        </h:column>
+                                    </h:panelGrid>
+                                </div>
+                                <br></br>
+
+                                <div class="ui-fluid">
+                                    <h:panelGrid columns="2" > 
+                                        <h:column>
+                                            <h:selectOneMenu class="mb-1" style="font-weight: 600; width:200px; height:25px; border-radius: 5px; border-color: #bcbebf"  value="#{soliServController.idTipoCedu}" disabled="true">
+                                                <f:selectItems value="#{rolTipoCedController.tipoCedu}" var="TipCed" itemLabel="Cédula #{TipCed.tipoCedula}" itemValue="#{TipCed.idTipoCedula}"/>
+                                            </h:selectOneMenu>
+                                            <br/>
+                                            <p:inputText type="number" style="width:285px" id="CedulaClient" required="true" value="#{soliServController.cedula}" disabled="true"/>
+                                        </h:column>
+                                        <h:column>
+                                            <div class="mx-4">
+                                                <h:outputLabel class="mb-2" style="font-weight: 600" for="TelCliente" value="Teléfono del Cliente" />
+                                                <br/>
+                                                <p:inputText type="number" style="width:325px" id="TelCliente" required="true" value="#{soliServController.telefono}" disabled="true"/>
+                                            </div>
+                                        </h:column>
+                                    </h:panelGrid>
+                                </div>
+                                <br></br>
+
+                                <div class="ui-fluid col-10">
+                                    <h:outputLabel class="mb-2" style="font-weight: 600" for="DireccInstal" value="Dirección del Cliente"/>
+                                    <p:inputTextarea id="DireccInstal" required="true" value="#{soliServController.direccion}" disabled="true"/>
+                                </div> 
+                                <br/>
+
+                                <div class="ui-fluid col-10">
+                                    <h:outputLabel class="mb-2" style="font-weight: 600" for="Proyecto" value="Nombre del Proyecto"/>
+                                    <p:inputText id="Proyecto" required="true" requiredMessage="Campo Obligatorio" value="#{soliServController.proyecto}" disabled="true"/>
+                                </div> 
+                                <br/>
+
+                                <div class="ui-fluid col-10">
+                                    <h:outputLabel class="mb-2" style="font-weight: 600" for="NotasMue" value="Notas del Mueble (Agregar Tipo de Mueble, Espacio a Tratar y otras Notas Importantes)"/>
+                                    <p:inputTextarea id="NotasMue" required="true" value="#{soliServController.notasMue}" disabled="true"/>
+                                </div> 
+                                <br/>
+
+                                <div class="ui-fluid col-10">
+                                    <h:outputLabel class="mb-2" style="font-weight: 600" for="NotasDise" value="Notas del Diseño del Mueble (Agregar Tipo de Material, Color del Diseño y otras Notas Importantes)"/>
+                                    <p:inputTextarea id="NotasDise" required="true" value="#{soliServController.notasDise}" disabled="true"/>
+                                    <br/>
+                                    <br/>
+                                    <h:outputLabel class="mb-2" style="font-weight: 600" for="DiseñoClie" value="Diseño del Cliente" />
+                                    
+                                    <img id="DiseñoClie" src="#{soliServController.disenoCli}" width="900" />
+                                    
+                                </div> 
+                                <br/>
+
+                                <div class="ui-fluid col-10">
+                                    <h:outputLabel class="mb-2" style="font-weight: 600" for="NotasMedi" value="Notas de Medidas del Mueble(Agregar Descripción de Medidas, Medidas Alto, Ancho, Fondo y otras Notas Importantes)"/>
+                                    <p:inputTextarea id="NotasMedi" required="true" value="#{soliServController.notasMedi}" disabled="true"/>
+                                </div> 
+                                <br/>
+
+                                <div class="ui-fluid col-10">
+                                    <h:outputLabel class="mb-2" style="font-weight: 600" for="NotasElemen" value="Notas de Elementos (Agregar Tipo Elemento, Medidas Alto, Ancho, Fondo y otras Notas Importantes)"/>
+                                    <p:inputTextarea id="NotasElemen" required="true" value="#{soliServController.notasElem}" disabled="true"/>
+                                </div> 
+                                <br/>
+
+                                <div class="ui-fluid">
+                                    <h:panelGrid columns="2">
+                                        <h:column>
+                                    <button type="button" class="btn btn-success btn-sm" style=" font-size: 100%; width:150px; height:40px;"  data-bs-toggle="collapse" data-bs-target="#Acept_Soli" aria-expanded="false" aria-controls="Acept_Soli">Aceptar Solicitud</button>
+                                        </h:column> 
+                                    <h:column>
+                                    <div class="mx-4">
+                                    <button type="button" class="btn btn-danger btn-sm" style=" font-size: 100%; width:150px; height:40px;"  data-bs-toggle="collapse" data-bs-target="#Rechac_Soli" aria-expanded="false" aria-controls="Rechac_Soli">Rechazar Solicitud</button> 
+                                    </div> 
+                                    </h:column>
+                                    </h:panelGrid>
+                                    </div>
+                                <br/>
+                                
+                                <div class="collapse" id="Acept_Soli">
+                                    <div class="ui-fluid col-8">
+                                    <h:outputLabel for="Clasif_Soli" class="mb-2" style="font-weight: 600" value="Clasificar Solicitud de Servicio por Prioridad"/>
+                                    <br/>
+                                    </div>
+                                    <div class="ui-fluid col-4">
+                                        <h:selectOneMenu class="mb-3" style="font-weight: 600; width:200px; height:40px" value="#{soliServController.clasifiSS}">
+                                            <f:selectItem itemLabel="Urgente" itemValue="Urgente"/>
+                                            <f:selectItem itemLabel="Intermedia" itemValue="Intermedia"/>
+                                            <f:selectItem itemLabel="Normal" itemValue="Normal"/>
+                                        </h:selectOneMenu>
+                                        <br/>
+                                    </div>
+                                        <div class="ui-fluid col-4">
+                                            <p:commandButton id="guardar" ajax="true" value="Guardar Prioridad de S.S"  styleClass="ui-button-info" action="#{soliServController.clasificarSS()}" />
+                                    <br/>
+                                        </div>
+                                </div>
+
+                                <div class="collapse" id="Rechac_Soli">
+                                    <div class="ui-fluid">
+                                        <h:outputLabel class="mb-2" style="font-weight: 600" for="Justif_Rech_SS" value="Justificación del Rechazo de la Solicitud de Servicio" />
+                                    </div>
+                                    <div class="ui-fluid col-10">
+                                        <p:inputText  id="Justif_Rech_SS" placeholder="Escribir justifación del rechazo" value="#{soliServController.justifiss}"/>
+                                    </div>
+                                    <br/>
+                                    <div class="ui-fluid col-4">
+                                        <p:commandButton id="GuJusSS" value="Guardar Justificación" ajax="false" styleClass="ui-button-info" action="#{soliServController.modificarRechazar()}"/>
+                                    </div>
+                                    </div>
+
+                            
+                        
+
+                            </div>  
+                            
+                        </h:form>
+                            <div class="card-footer">
+                                <span style="float: right">
+                                    <p:commandButton value="Regresar a Solicitud Servicio" id="devolver" styleClass="ui-button-secondary" ajax="true" onclick="location.href = '/SCFM/faces/ventas/SolicitudesServicio.xhtml';"/>
+                                </span>
+                            </div>    
+                    </div> 
+                            
+                    </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

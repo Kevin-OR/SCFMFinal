@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+    
+    <h:body>
+        <ui:composition template="./../resources/templates/plantillaAdmin.xhtml">
+            <ui:define name="content">
+                <h:form>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Orden Reparación Garantía</h1>
+                        <div class="card-body">
+                            <ol class="breadcrumb mb-2">
+                                <li class="breadcrumb-item"><a href="/SCFM/faces/inicio.xhtml">Inicio</a></li>
+                                <li class="breadcrumb-item active">Orden Reparación Garantía</li>
+                            </ol>
+
+                            <div style="text-align: right;">
+                                <p:commandButton type="Button" styleClass="ui-button-success" action="#{ORController.vaciarEspacios()}" 
+                                                 value="Nueva Orden de Reparación" />
+                            </div>
+                            <br></br>        
+
+                            <div class="card-body">     
+                                <p:dataTable var="OR" value="#{ORController.ordenesRepaGaran}" paginator="true" paginatorPosition="bottom" rows="10">
+                                    <p:column headerText="Código O.R" style="width:10%">
+                                        <h:outputText value="OR-#{OR.idOrdRepa}"/>
+                                    </p:column>
+                                    <p:column headerText="Nombre Cliente" style="width:10%">
+                                        <h:outputText value="#{OR.nombClient} #{OR.priApeClient}"/>
+                                    </p:column>
+                                    <p:column headerText="Proyecto" style="width:10%">
+                                        <h:outputText value="#{OR.proyecto}"/>
+                                    </p:column>
+                                    
+                                    <p:column headerText="Opción" style="width:10%">
+                                        <p:commandButton value="Visualizar" ajax="true" action="#{ORController.edita(OR.idOrdRepa, 5, 9)}"/>
+                                    </p:column>
+                                </p:dataTable>
+                            </div>
+                        </div>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

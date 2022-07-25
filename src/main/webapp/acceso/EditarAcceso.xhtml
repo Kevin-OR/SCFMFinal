@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../resources/templates/plantillaAdmin.xhtml">
+
+    <ui:define name="content">
+        <main>
+            <form action="" method="post">
+
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Actualizar inventario</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item">
+                            <a href="/SCFM/faces/inicio.xhtml">Inicio</a>
+                        </li>
+                        <li class="breadcrumb-item active">Actualizar inventario</li>
+                    </ol>
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-4">
+                                    <!-- Full Name -->
+                                    <label for="PriApellCliente" class="control-label">Cédula</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="PriApellCliente"
+                                        name="full_name"
+                                        Value="12345678"
+                                        required="required"/>
+                                </div>
+
+                                <div class="col-4">
+                                    <label for="NombreCliente" class="control-label">Nombre</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="NombreCliente"
+                                        name="full_name"
+                                        value="Marcos"
+                                        required="required"/>
+                                </div>
+
+                                <div class="col-4">
+                                    <!-- Full Name -->
+                                    <label for="PriApellCliente" class="control-label">Primer Apellido</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="PriApellCliente"
+                                        name="full_name"
+                                        value="Vega"
+                                        required="required"/>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <!-- Full Name -->
+                                    <label for="SegApellCliente" class="control-label">Segundo Apellido</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="SegApellCliente"
+                                        name="full_name"
+                                        value="Mora"
+                                        required="required"/>
+
+                                </div>
+
+                                <div class="col-4">
+                                    <!-- Full Name -->
+                                    <label for="SegApellCliente" class="control-label">Número de Teléfono</label>
+                                    <input
+                                        type="number"
+                                        class="form-control"
+                                        id="SegApellCliente"
+                                        name="full_name"
+                                        value="88888888"
+                                        required="required"/>
+
+                                </div>
+
+                                <div class="col-4">
+                                    <!-- Full Name -->
+                                    <label for="SegApellCliente" class="control-label">Correo Electrónico</label>
+                                    <input
+                                        type="email"
+                                        class="form-control"
+                                        id="SegApellCliente"
+                                        name="full_name"
+                                        value="Marcos23234@gmail.com"
+                                        required="required"/>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label for="SegApellCliente" class="control-label">Puesto</label>
+                                    <select class="form-select form-select- mb-3" aria-label=".form-select-lg example">
+                                        <option selected="selected">Seleccionar</option>
+                                        <option value="1">Administrador</option>
+                                        <option value="2">Vendedor</option>
+                                        <option value="3">Jefe de taller</option>
+                                        <option value="3">Empleado</option>
+                                    </select>
+                                </div>
+
+
+                                <div class="col-4">
+                                    <!-- Full Name -->
+                                    <label for="SegApellCliente" class="control-label">Salario por hora</label>
+                                    <input
+                                        type="number"
+                                        class="form-control"
+                                        id="SegApellCliente"
+                                        name="full_name"
+                                        Value="1000"
+                                        required="requiered"/>
+
+                                </div>
+
+
+
+                            </div>
+
+                            
+                            <br></br>
+                            <div>
+                                <button
+                                    type="button"
+                                    onclick="location.href = '/SCFM/faces/inventario/InvenPersonal.xhtml';"
+                                    class="btn btn-success btn-sm">Guardar</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </main>
+    </ui:define>
+
+</ui:composition>

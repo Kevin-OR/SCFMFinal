@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <ui:composition template="./../resources/templates/plantillaAdmin.xhtml">
+            <ui:define name="content">
+                <h:form>
+                    <p:growl id="otmsj" showDetail="true" />
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Visualizar O.T. en Producción</h1>
+                        <ol class="breadcrumb mb-4"><li class="breadcrumb-item"><a href="/SCFM/faces/inicio.xhtml">Inicio</a></li>
+                            <li class="breadcrumb-item"><a href="/SCFM/faces/ventas/OrdenTrabajo.xhtml">O.T. en Producción</a></li>
+                            <li class="breadcrumb-item active">Visualizar O.T. en Producción</li>
+                        </ol>
+
+                        <div class="card mb-4">
+                            <div class="card-header" >
+                                <div style="  flex-direction: row">
+                                    <h:outputLabel class="mb-1" style="font-weight: 600" for="ot" value="Solicitud de Servicio" /> 
+                                    <p:inputText id="ot"  class="mx-4" value="SS-#{OTController.idOtordenservicio}" size="10" disabled="true" />
+                                    <p:commandButton id="VerEspe" style="margin-left: 48%" styleClass="ui-button-help"  value="Ver Especificaciones" ajax="true" action="#{especificacionOTController.obtenerId(OTController.idOt)}" />
+                                    <p:commandButton id="EnviOT" style="margin-left: 2%" styleClass="ui-button-success"  value="Enviar O.T" ajax="false" action="#{OTController.enviado(1)}"/>
+                                </div>
+                            </div>  
+
+                            <div class="card-body">
+
+                                <div class="ui-fluid">
+
+                                    <h:panelGrid columns="2">
+                                        <h:column>
+                                            <h:outputLabel class="mb-2" style="font-weight: 600" for="NomCli" value="Nombre del Cliente"/>
+                                            <p:inputText  id="NomCli" value="#{OTController.nomClien} #{OTController.priApell} #{OTController.segApell}" disabled="true"/>
+                                            <h:message for="NomCli" class="text-danger"/>
+                                        </h:column>
+                                        <h:column>
+                                            <div class="mx-4">
+                                                <h:outputLabel class="mb-2" style="font-weight: 600" for="NomPro" value="Nombre del Proyecto" />
+                                                <p:inputText  id="NomPro" value="#{OTController.proyect}" disabled="true"/>
+                                                <h:message for="NomPro" class="text-danger"/>
+                                            </div>
+                                        </h:column>
+                                        <h:column>
+                                            <br/>
+                                            <h:outputLabel class="mb-2" style="font-weight: 600" for="FeIniOT" value="Fecha Inicio de Orden de Trabajo" />
+                                            <p:inputText type="date" id="FeIniOT" value="#{OTController.fechaIni}" required="true" requiredMessage="Campo Obligatorio" disabled="true"/>
+                                            <h:message for="FeIniOT" class="text-danger"/>
+                                        </h:column>
+                                        <h:column>
+                                            <br/>
+                                            <div class="mx-4">
+                                                <h:outputLabel class="mb-2" style="font-weight: 600" for="FeEnOT" value="Fecha Entrega de Orden de Trabajo" />
+                                                <p:inputText type="date" id="FeEnOT" value="#{OTController.fechaEntre}" required="true" requiredMessage="Campo Obligatorio" disabled="true"/>
+                                                <h:message for="FeEnOT" class="text-danger"/>
+                                            </div>
+                                        </h:column>
+                                    </h:panelGrid>
+                                </div>
+                                <br></br>
+
+                                <div class="ui-fluid">
+                                    <h:panelGrid columns="2">
+                                        <h:column>
+                                            <p:commandButton id="Acep" value="Aceptar O.T" ajax="false" action="#{OTController.enviado(2)}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <div class="mx-4">
+                                                <button type="button" class="btn btn-danger btn-sm" style=" font-size: 100%; width:150px; height:40px;" data-bs-toggle="collapse" data-bs-target="#Rechac_OT" aria-expanded="false" aria-controls="Rechac_OT">Rechazar O.T</button>                                            
+                                            </div>
+                                        </h:column>
+                                    </h:panelGrid>
+                                </div> 
+                                <br/>
+
+                                <div class="collapse" id="Rechac_OT">
+                                    <div class="ui-fluid">
+                                        <h:outputLabel class="mb-2" style="font-weight: 600" for="Justif_Rech_OT" value="Justificación del Rechazo de la Orden de Trabajo" />
+                                    </div>
+                                    <div class="ui-fluid col-10">
+                                        <p:inputText  id="Justif_Rech_OT" placeholder="Escribir justifación del rechazo" value="#{OTController.justifiOt}"/>
+                                    </div>
+                                    <br/>
+                                    <div class="ui-fluid col-2">
+                                        <p:commandButton id="GuJusOT" value="Guardar Justificación" ajax="false" styleClass="ui-button-info" action="#{OTController.enviado(3)}"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-footer">
+                                <span style="float: right">
+                                    <p:commandButton value="Regresar a Ordenes Trabajo" id="devolver" styleClass="ui-button-secondary" ajax="true" onclick="location.href = '/SCFM/faces/ventas/OrdenTrabajo.xhtml';"/>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
